@@ -27,7 +27,7 @@ export default function WeatherForecast({ weatherInfo, mode }) {
   return (
     <section className="content-wrapper">
       <h3>Dự báo</h3>
-      <div className="container">
+      <div className="">
         <div className="row row-cols-lg-6 row-cols-md-3 row-cols-2">
           {(() => {
             const arr = [];

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
@@ -14,11 +14,32 @@ Chart.register(CategoryScale);
 function App() {
   const [mode, setMode] = useState('metric');
   const [weatherInfo, setWeatherInfo] = useState(temp);
+  const [darkMode, setDarkMode] = useState(false); // Thêm state cho Dark Mode
+
+  // Kiểm tra và áp dụng Dark Mode từ localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'true') {
+      setDarkMode(true);
+      document.body.classList.add('dark');
+    }
+  }, []);
+
+  // Thay đổi chế độ Dark Mode
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', !darkMode);
+    if (!darkMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  };
 
   async function fetchWeatherInfo(city = '') {
     let cityUrl = encodeURI(city);
     try {
-      let url = `https://1weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityUrl}%2C%20viet%20nam?unitGroup=metric&key=W53D3PBB5PC5A9AWEADBJQ8VJ&contentType=json`;
+      let url = `https://1weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityUrl},Viet%20Nam?unitGroup=metric&key=W53D3PBB5PC5A9AWEADBJQ8VJ&contentType=json`;
       const response = await fetch(url);
       if (!response.ok) {
         alert('Khong tim thay thanh pho!');
@@ -32,10 +53,15 @@ function App() {
   }
 
   return (
-    <section>
+    <section
+      data-bs-theme={darkMode && 'dark'}
+      className="text-body bg-body"
+    >
       <Header
         fetchWeatherInfo={fetchWeatherInfo}
         changeMode={setMode}
+        toggleDarkMode={toggleDarkMode} // Truyền hàm toggle Dark Mode
+        darkMode={darkMode} // Truyền trạng thái Dark Mode
       />
       <CurrentWeather
         weatherInfo={weatherInfo}

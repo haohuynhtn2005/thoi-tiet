@@ -2,7 +2,27 @@ import { format } from 'date-fns';
 import { getDistanceString, getTemperatureString } from '../js/utils.js';
 import { useEffect, useState } from 'react';
 
-export default function CurrentWeather({ weatherInfo, mode }) {
+export default function CurrentWeather({ weatherInfo, mode, darkMode}) {
+  const [geolocation, setGeolocation] = useState({
+    lat: 10.774,
+    lon: 106.634,
+  });
+  async function getCurrentGeolocation() {
+    if (!navigator.geolocation) {
+      return;
+    }
+    await navigator.geolocation.getCurrentPosition(async (position) => {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      setGeolocation({
+        lat: latitude,
+        lon: longitude,
+      });
+    });
+  }
+  useEffect(() => {
+    getCurrentGeolocation();
+  }, []);
 
   return (
     <section className="content-wrapper">

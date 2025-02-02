@@ -2,15 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import citys from '../js/citys.js';
+import darkThemeSelect from '../js/darkThemeSelect.js';
 
-export default function Header({ fetchWeatherInfo, changeMode }) {
+export default function Header({ fetchWeatherInfo, changeMode, toggleDarkMode, darkMode }) {
   const navigate = useNavigate();
   const { city } = useParams();
   const [currentCity, setCurrentCity] = useState('');
+  const [logoSrc, setLogoSrc] = useState("/assets/logo.svg"); // State lưu đường dẫn logo
+
+  // Cập nhật logo khi dark mode thay đổi
+  useEffect(() => {
+    setLogoSrc(darkMode ? "/assets/logo-dark.svg" : "/assets/logo.svg");
+  }, [darkMode]);
 
   async function getCurrentCity(abortController = AbortController.prototype) {
     if (!navigator.geolocation) {
-      alert('Thiết bị không hỗ trợ truy cập vị trí');
+      // alert('Thiết bị không hỗ trợ truy cập vị trí');
       navigate(`/${encodeURI('ho-chi-minh')}`);
       return;
     }
@@ -32,13 +39,13 @@ export default function Header({ fetchWeatherInfo, changeMode }) {
             return;
           }
           console.error(error);
-          alert('Khong lay duoc vi tri!')
+          // alert('Khong lay duoc vi tri!')
           navigate(`/${encodeURI('ho-chi-minh')}`);
         }
       },
       (err) => {
         if (err.PERMISSION_DENIED) {
-          alert('Hãy bật truy cập vị trí');
+          // alert('Hãy bật truy cập vị trí');
         }
       }
     );
@@ -60,15 +67,8 @@ export default function Header({ fetchWeatherInfo, changeMode }) {
   return (
     <section className="content-wrapper">
       <div className="d-flex flex-column flex-sm-row gap-1 mb-2">
-        <Link
-          to="/"
-          className="flex-shrink-0 me-1"
-        >
-          <img
-            src="/assets/logo.svg"
-            alt=""
-            style={{ height: '2em' }}
-          />
+        <Link to="/" className="flex-shrink-0 me-1">
+          <img src={logoSrc} alt="Logo" style={{ height: '2em' }} />
         </Link>
         <div style={{ flex: 1 }}>
           {/* stp */}
@@ -80,6 +80,7 @@ export default function Header({ fetchWeatherInfo, changeMode }) {
               navigate(`/${encodeURI(selectOption.value)}`);
             }}
             placeholder="Tỉnh/Thành phố"
+            styles={darkMode && darkThemeSelect}
           />
         </div>
         <select
@@ -87,13 +88,25 @@ export default function Header({ fetchWeatherInfo, changeMode }) {
             changeMode(e.target.value);
           }}
           name="mode"
-          className="form-select bg-light"
+          className="form-select bg-body-tertiary"
           style={{ width: 'fit-content' }}
         >
           <option value="metric">Metric (°C, km)</option>
           <option value="us">US (°F, miles)</option>
           <option value="uk">UK (°C, miles)</option>
         </select>
+
+        {/* Nút bật/tắt dark mode */}
+        <label className="ui-switch">
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => toggleDarkMode()}
+          />
+          <div className="slider">
+            <div className="circle"></div>
+          </div>
+        </label>
       </div>
       <div className="d-sm-flex justify-content-between">
         <div>
@@ -106,7 +119,7 @@ export default function Header({ fetchWeatherInfo, changeMode }) {
           onClick={() => {
             navigate('/');
           }}
-          className="btn btn-light border me-1"
+          className="btn text-body bg-body-tertiary border me-1"
         >
           <i className="bi bi-crosshair"></i> Lấy vị trí hiện tại
         </button>
