@@ -1,56 +1,90 @@
-import { useState } from 'react';
 import './App.css';
 import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
 import Header from './components/Header';
 import CurrentWeather from './components/CurrentWeather';
-import WeatherForecast from './components/WeatherForecast';
+import Forecast from './components/Forecast.jsx';
 import WeatherChart from './components/WeatherChart';
 import OtherLocations from './components/OtherLocations.jsx';
-import { temp } from './js/temp.js';
+import {
+  WeatherInfoContext,
+} from './components/AppProvider.jsx';
+import useWeatherInfo from './hooks/useWeatherInfo.js';
+import Wrapper from './components/Wrapper.jsx';
 
 Chart.register(CategoryScale);
 
-function App() {
-  const [mode, setMode] = useState('metric');
-  const [weatherInfo, setWeatherInfo] = useState(temp);
+function LoadingApp() {
+  return (
+    <Wrapper>
+      <div
+        className="bg-body-tertiary content-wrapper"
+        style={{ minHeight: '100vh' }}
+      >
+        <div className="placeholder-glow mb-1">
+          <span className="placeholder col-4" />
+        </div>
+        <div className="placeholder-glow mb-1">
+          <span
+            className="placeholder col-4"
+            style={{ height: '8em' }}
+          />
+        </div>
+        <div className="placeholder-glow mb-1">
+          <span className="placeholder col-7" />
+          <span className="placeholder col-4" />
+          <span className="placeholder col-4" />
+          <span className="placeholder col-6" />
+          <span className="placeholder col-8" />
+          <span className="placeholder col-9" />
+          <span className="placeholder col-11" />
+          <span className="placeholder col-3" />
+          <span className="placeholder col-6" />
+          <span className="placeholder col-8" />
+        </div>
+        <div className="placeholder-glow mb-1">
+          <span
+            className="placeholder col-12"
+            style={{ height: '500px' }}
+          />
+        </div>
+      </div>
+    </Wrapper>
+  );
+}
 
-  async function fetchWeatherInfo(city = '') {
-    let cityUrl = encodeURI(city);
-    try {
-      let url = `https://1weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityUrl}%2C%20viet%20nam?unitGroup=metric&key=W53D3PBB5PC5A9AWEADBJQ8VJ&contentType=json`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        alert('Khong tim thay thanh pho!');
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const data = await response.json();
-      setWeatherInfo(data);
-    } catch (error) {
-      console.error(error.message);
-    }
+function App() {
+  const { loading, error, weatherInfo } = useWeatherInfo();
+  if (loading) {
+    return <LoadingApp />;
+  }
+
+  if (error) {
+    console.warn(error);
+    return (
+      <Wrapper>
+        <div
+          className="d-flex align-items-center justify-content-center fs-3 text-danger"
+          style={{ minHeight: '100vh' }}
+        >
+          <div>
+            <i className="bi bi-exclamation-octagon"></i> {error.message}
+          </div>
+        </div>
+      </Wrapper>
+    );
   }
 
   return (
-    <section>
-      <Header
-        fetchWeatherInfo={fetchWeatherInfo}
-        changeMode={setMode}
-      />
-      <CurrentWeather
-        weatherInfo={weatherInfo}
-        mode={mode}
-      />
-      <WeatherForecast
-        weatherInfo={weatherInfo}
-        mode={mode}
-      />
-      <WeatherChart
-        weatherInfo={weatherInfo}
-        mode={mode}
-      />
-      <OtherLocations mode={mode} />
-    </section>
+    <WeatherInfoContext.Provider value={{ weatherInfo }}>
+      <Wrapper>
+        <Header />
+        <CurrentWeather />
+        <Forecast />
+        <WeatherChart />
+        <OtherLocations />
+      </Wrapper>
+    </WeatherInfoContext.Provider>
   );
 }
 

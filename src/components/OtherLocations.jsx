@@ -1,28 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import citys from '../js/citys.js';
-import { getTemperatureString } from '../js/utils.js';
+import { getTemperatureString } from '../common/utils.js';
+import { ModeContext } from './AppProvider.jsx';
+import PropTypes from 'prop-types';
+import { domain } from '../common/commonVal.js';
 
-function WeatherOfCity({ city, mode }) {
+function WeatherOfCity({ city }) {
+  const { mode } = useContext(ModeContext);
   const [weatherInfo, setWeatherInfo] = useState(null);
 
   useEffect(() => {
-    let cityUrl = encodeURI(city);
-    let url = `https://1weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityUrl}?unitGroup=metric&key=W53D3PBB5PC5A9AWEADBJQ8VJ&contentType=json`;
-
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          alert('Khong tim thay thanh pho!');
-          throw new Error(`Response status: ${response.status}`);
+    fetch(`${domain}/search/${city}`, {
+      mode: 'cors',
+    })
+      .then(async (response) => {
+        if (response.status >= 400) {
+          const msg = (await response.json()).message;
+          throw new Error(msg);
         }
-        return response.json();
+        setWeatherInfo(await response.json());
       })
-      .then((data) => {
-        setWeatherInfo(data);
-      })
-      .catch((error) => {
-        console.error(error.message);
+      .catch((e) => {
+        if (e.name === 'AbortError') {
+          return;
+        }
+        console.error(e.message);
       });
   }, [city]);
 
@@ -41,18 +43,15 @@ function WeatherOfCity({ city, mode }) {
       className="col"
     >
       <div
-        className="card"
+        className="h-100 p-2 bg-body-tertiary border rounded-3"
         style={{ textAlign: 'center' }}
       >
-        <h5 className="card-title">
-          {citys.find((storedCity) => {
-            return storedCity.value == city;
-          })?.label || ''}
-        </h5>
+        <h5>{weatherInfo.resolvedAddress}</h5>
         <img
-          src={`assets/status/${weatherInfo.currentConditions.icon}.svg`}
+          src={`/assets/status/${weatherInfo.currentConditions.icon}.svg`}
           alt=""
           className="m-auto"
+          style={{ width: '50%' }}
         />
         <span
           className="card-text d-block"
@@ -60,39 +59,42 @@ function WeatherOfCity({ city, mode }) {
         >
           <div className="d-flex justify-content-center gap-2 align-items-center">
             <i className="fa-solid fa-droplet" />
-            <p className="m-0">{humidity}%</p>
+            <div className="m-0">{humidity}%</div>
           </div>
-          <div>{conditions}</div>
-          <div className="my-1">{getTemperatureString(mode, temperature)}</div>
+          <div className=' text-truncate'>{conditions}</div>
+          <div>{getTemperatureString(mode, temperature)}</div>
         </span>
       </div>
     </Link>
   );
 }
 
-export default function OtherLocations({ mode }) {
-  // Các thành phố bạn muốn hiển thị thời tiết
-  const cities = [
-    'ha-noi',
-    'quang-ninh',
-    'khanh-hoa',
-    'da-nang',
-    'binh-duong',
-    'dong-nai',
-    'vinh-long',
-    'can-tho',
-  ];
+WeatherOfCity.propTypes = {
+  city: PropTypes.string,
+};
 
+// Các thành phố bạn muốn hiển thị thời tiết
+const cities = [
+  'ha-noi',
+  'quang-ninh',
+  'khanh-hoa',
+  'da-nang',
+  'binh-duong',
+  'dong-nai',
+  'vinh-long',
+  'can-tho',
+];
+
+export default function OtherLocations() {
   return (
     <div className="content-wrapper">
       <h3>Thời tiết khu vực khác</h3>
       <div className="container-fluid">
-        <div className="row row-cols-2 row-cols-lg-4 g-3">
+        <div className="row row-cols-2 row-cols-sm-4 g-2">
           {cities.map((city) => (
             <WeatherOfCity
               key={city}
               city={city}
-              mode={mode}
             />
           ))}
         </div>

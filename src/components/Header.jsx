@@ -1,61 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import citys from '../js/citys.js';
+import darkThemeSelect from '../common/darkThemeSelect.js';
+import {
+  DarkModeContext,
+  ModeContext,
+  WeatherInfoContext,
+} from './AppProvider.jsx';
+import { useContext } from 'react';
+import useLocationOpts from '../hooks/useLocationOpts.js';
 
-export default function Header({ fetchWeatherInfo, changeMode }) {
+export default function Header() {
   const navigate = useNavigate();
-  const { city } = useParams();
-  const [currentCity, setCurrentCity] = useState('');
-
-  async function getCurrentCity(abortController = AbortController.prototype) {
-    if (!navigator.geolocation) {
-      alert('Thiết bị không hỗ trợ truy cập vị trí');
-      navigate(`/${encodeURI('ho-chi-minh')}`);
-      return;
-    }
-    await navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-        try {
-          let url = `http://1api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=88d8c3a16490d6e5ba6e293820f3a903`;
-          const response = await fetch(url, { signal: abortController.signal });
-          if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-          }
-          const data = await response.json();
-          setCurrentCity(data[0].name);
-          fetchWeatherInfo(data[0].name);
-        } catch (error) {
-          if (error instanceof DOMException) {
-            return;
-          }
-          console.error(error);
-          alert('Khong lay duoc vi tri!')
-          navigate(`/${encodeURI('ho-chi-minh')}`);
-        }
-      },
-      (err) => {
-        if (err.PERMISSION_DENIED) {
-          alert('Hãy bật truy cập vị trí');
-        }
-      }
-    );
-  }
-
-  useEffect(() => {
-    if (city) {
-      setCurrentCity(city);
-      fetchWeatherInfo(city);
-      return;
-    }
-    const abortController = new AbortController();
-    getCurrentCity(abortController);
-    return () => {
-      abortController.abort();
-    };
-  }, [city]);
+  const locationOpts = useLocationOpts();
+  const { mode, setMode } = useContext(ModeContext);
+  const { darkMode, setDarkMode } = useContext(DarkModeContext);
+  const { weatherInfo } = useContext(WeatherInfoContext);
 
   return (
     <section className="content-wrapper">
@@ -65,51 +24,62 @@ export default function Header({ fetchWeatherInfo, changeMode }) {
           className="flex-shrink-0 me-1"
         >
           <img
-            src="/assets/logo.svg"
-            alt=""
+            src={darkMode ? '/assets/logo-dark.svg' : '/assets/logo.svg'}
+            alt="Logo"
             style={{ height: '2em' }}
           />
         </Link>
         <div style={{ flex: 1 }}>
-          {/* stp */}
           <Select
-            options={citys}
+            options={locationOpts}
             value={''}
-            // Hàm cập nhật thành phố dựa vào lựa chọn
             onChange={(selectOption) => {
-              navigate(`/${encodeURI(selectOption.value)}`);
+              navigate(`/chi-tiet/${encodeURI(selectOption.value)}`);
             }}
             placeholder="Tỉnh/Thành phố"
+            styles={darkMode && darkThemeSelect}
           />
         </div>
         <select
+          value={mode}
           onChange={(e) => {
-            changeMode(e.target.value);
+            setMode(e.target.value);
           }}
           name="mode"
-          className="form-select bg-light"
+          className="form-select bg-body-tertiary"
           style={{ width: 'fit-content' }}
         >
           <option value="metric">Metric (°C, km)</option>
           <option value="us">US (°F, miles)</option>
           <option value="uk">UK (°C, miles)</option>
         </select>
+
+        {/* Nút bật/tắt dark mode */}
+        <label className="ui-switch align-self-sm-center my-1">
+          <input
+            type="checkbox"
+            name="darkMode"
+            checked={darkMode}
+            onChange={() => {
+              setDarkMode(!darkMode);
+            }}
+          />
+          <div className="slider">
+            <div className="circle"></div>
+          </div>
+        </label>
       </div>
       <div className="d-sm-flex justify-content-between">
         <div>
           <i className="bi bi-geo-alt-fill"></i> Vị trí:{' '}
-          {citys.find((storedCity) => {
-            return storedCity.value == city;
-          })?.label || currentCity}
+          {weatherInfo?.resolvedAddress}
         </div>
-        <button
-          onClick={() => {
-            navigate('/');
-          }}
-          className="btn btn-light border me-1"
+        <Link
+          to="/vi-tri-hien-tai"
+          className="btn bg-body-tertiary border"
         >
           <i className="bi bi-crosshair"></i> Lấy vị trí hiện tại
-        </button>
+        </Link>
       </div>
     </section>
   );

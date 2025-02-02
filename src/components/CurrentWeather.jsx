@@ -1,8 +1,11 @@
 import { format } from 'date-fns';
-import { getDistanceString, getTemperatureString } from '../js/utils.js';
-import { useEffect, useState } from 'react';
+import { getDistanceString, getTemperatureString } from '../common/utils.js';
+import { ModeContext, WeatherInfoContext } from './AppProvider.jsx';
+import { useContext } from 'react';
 
-export default function CurrentWeather({ weatherInfo, mode }) {
+export default function CurrentWeather() {
+  const { mode } = useContext(ModeContext);
+  const { weatherInfo } = useContext(WeatherInfoContext);
 
   return (
     <section className="content-wrapper">
@@ -14,7 +17,7 @@ export default function CurrentWeather({ weatherInfo, mode }) {
           <b>
             <small>
               Thời tiết hiện tại ngày&nbsp;
-              {format(new Date(weatherInfo.days[0].datetime), 'dd/MM')}
+              {format(new Date(weatherInfo.days[0].datetime), 'dd/MM/yyyy')}
             </small>
           </b>
           <div className="d-sm-flex gap-3 align-items-center">
@@ -94,13 +97,12 @@ export default function CurrentWeather({ weatherInfo, mode }) {
         </div>
         <div style={{ flex: 4 }}>
           <iframe
-            // src={`https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=${geolocation.lat}&lon=${geolocation.lon}&zoom=8`}
             src={`https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=11&overlay=wind&product=ecmwf&level=surface&lat=${weatherInfo.latitude}&lon=${weatherInfo.longitude}&detailLat=${weatherInfo.latitude}&detailLon=${weatherInfo.longitude}&marker=true`}
             className="rounded-3"
             style={{
+              aspectRatio: '3/2',
               width: '100%',
-              minHeight: '100%',
-              height: '300px',
+              minHeight: '300%',
             }}
           ></iframe>
         </div>
