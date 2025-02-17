@@ -1,82 +1,108 @@
-import { useState, useEffect } from 'react';
 import './App.css';
 import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
 import Header from './components/Header';
 import CurrentWeather from './components/CurrentWeather';
-import WeatherForecast from './components/WeatherForecast';
+import Forecast from './components/Forecast.jsx';
 import WeatherChart from './components/WeatherChart';
 import OtherLocations from './components/OtherLocations.jsx';
-import { temp } from './js/temp.js';
+import {
+  DarkModeContext,
+  WeatherInfoContext,
+} from './components/AppProvider.jsx';
+import { useContext } from 'react';
+import useWeatherInfo from './hooks/useWeatherInfo.js';
+import PropTypes from 'prop-types';
 
 Chart.register(CategoryScale);
 
+function Wrapper({ children, style }) {
+  const { darkMode } = useContext(DarkModeContext);
+  return (
+    <section
+      data-bs-theme={darkMode ? 'dark' : 'light'}
+      className="text-body bg-body"
+      style={style}
+    >
+      {children}
+    </section>
+  );
+}
+
+Wrapper.propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.object,
+};
+
+function LoadingApp() {
+  return (
+    <Wrapper>
+      <div
+        className="bg-body-tertiary content-wrapper"
+        style={{ minHeight: '100vh' }}
+      >
+        <div className="placeholder-glow mb-1">
+          <span className="placeholder col-4" />
+        </div>
+        <div className="placeholder-glow mb-1">
+          <span
+            className="placeholder col-4"
+            style={{ height: '8em' }}
+          />
+        </div>
+        <div className="placeholder-glow mb-1">
+          <span className="placeholder col-7" />
+          <span className="placeholder col-4" />
+          <span className="placeholder col-4" />
+          <span className="placeholder col-6" />
+          <span className="placeholder col-8" />
+          <span className="placeholder col-9" />
+          <span className="placeholder col-11" />
+          <span className="placeholder col-3" />
+          <span className="placeholder col-6" />
+          <span className="placeholder col-8" />
+        </div>
+        <div className="placeholder-glow mb-1">
+          <span
+            className="placeholder col-12"
+            style={{ height: '500px' }}
+          />
+        </div>
+      </div>
+    </Wrapper>
+  );
+}
+
 function App() {
-  const [mode, setMode] = useState('metric');
-  const [weatherInfo, setWeatherInfo] = useState(temp);
-  const [darkMode, setDarkMode] = useState(false); // Thêm state cho Dark Mode
+  const { loading, error, weatherInfo } = useWeatherInfo();
+  if (loading) {
+    return <LoadingApp />;
+  }
 
-  // Kiểm tra và áp dụng Dark Mode từ localStorage
-  useEffect(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    if (savedMode === 'true') {
-      setDarkMode(true);
-      document.body.classList.add('dark');
-    }
-  }, []);
-
-  // Thay đổi chế độ Dark Mode
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', !darkMode);
-    if (!darkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  };
-
-  async function fetchWeatherInfo(city = '') {
-    let cityUrl = encodeURI(city);
-    try {
-      let url = `https://1weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${cityUrl},Viet%20Nam?unitGroup=metric&key=W53D3PBB5PC5A9AWEADBJQ8VJ&contentType=json`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        alert('Khong tim thay thanh pho!');
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const data = await response.json();
-      setWeatherInfo(data);
-    } catch (error) {
-      console.error(error.message);
-    }
+  if (error) {
+    console.warn(error);
+    return (
+      <Wrapper>
+        <div
+          className="d-flex align-items-center justify-content-center fs-3 text-danger"
+          style={{ minHeight: '100vh' }}
+        >
+          {error.message} &nbsp; <i className="bi bi-exclamation-octagon"></i>
+        </div>
+      </Wrapper>
+    );
   }
 
   return (
-    <section
-      data-bs-theme={darkMode && 'dark'}
-      className="text-body bg-body"
-    >
-      <Header
-        fetchWeatherInfo={fetchWeatherInfo}
-        changeMode={setMode}
-        toggleDarkMode={toggleDarkMode} // Truyền hàm toggle Dark Mode
-        darkMode={darkMode} // Truyền trạng thái Dark Mode
-      />
-      <CurrentWeather
-        weatherInfo={weatherInfo}
-        mode={mode}
-      />
-      <WeatherForecast
-        weatherInfo={weatherInfo}
-        mode={mode}
-      />
-      <WeatherChart
-        weatherInfo={weatherInfo}
-        mode={mode}
-      />
-      <OtherLocations mode={mode} />
-    </section>
+    <WeatherInfoContext.Provider value={{ weatherInfo }}>
+      <Wrapper>
+        <Header />
+        <CurrentWeather />
+        <Forecast />
+        <WeatherChart />
+        <OtherLocations />
+      </Wrapper>
+    </WeatherInfoContext.Provider>
   );
 }
 

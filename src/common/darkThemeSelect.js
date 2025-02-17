@@ -1,7 +1,7 @@
 const darkThemeSelect = {
   control: (base, state) => ({
     ...base,
-    backgroundColor: '#333', // Dark background for the input box
+    backgroundColor: '#2b3035', // Dark background for the input box
     borderColor: state.isFocused ? '#2196F3' : '#555', // Blue border when focused
     color: 'white', // Text color inside the input
     boxShadow: state.isFocused ? '0 0 0 1px #2196F3' : 'none', // Blue box shadow for focus state
@@ -23,7 +23,7 @@ const darkThemeSelect = {
   }),
   menu: (base) => ({
     ...base,
-    backgroundColor: '#333', // Dark background for the dropdown menu
+    backgroundColor: '#2b3035', // Dark background for the dropdown menu
     borderRadius: '8px', // Rounded corners for the dropdown
     color: 'white', // Text color inside the dropdown
   }),

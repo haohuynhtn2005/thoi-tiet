@@ -2,22 +2,10 @@ section {
   padding: 0.5em;
 }
 
-/* Áp dụng Dark Mode bằng CSS thuần */
-body {
-  background-color: white;
-  color: black;
-  transition: all 0.3s ease-in-out;
-}
-
-body.dark {
-  background-color: #1a202c;
-  color: #fff;
-}
-
 /* From Uiverse.io by nihad-abbasov */
 /* switch settings 👇 */
 .ui-switch {
-  --switch-bg: rgb(135, 150, 165);
+  --switch-bg: rgb(201, 207, 212);
   --switch-width: 48px;
   --switch-height: 20px;
   --circle-diameter: 32px;
@@ -100,8 +88,4 @@ body.dark {
 .ui-switch input:checked+.slider .circle {
   left: calc(100% - var(--circle-diameter));
   background-color: rgb(0, 56, 146);
-}
-
-body.dark .slider .circle {
-  background-color: rgb(255, 255, 255);
 }

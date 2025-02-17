@@ -1,21 +1,45 @@
 import { Line } from 'react-chartjs-2';
-import { getTemperature } from '../js/utils';
+import { getTemperature } from '../common/utils';
+import { ModeContext, WeatherInfoContext } from './AppProvider.jsx';
+import { useContext } from 'react';
 
-export default function WeatherChart({ weatherInfo, mode }) {
-  const labels = [
-    '00:00',
-    '02:00',
-    '04:00',
-    '06:00',
-    '08:00',
-    '10:00',
-    '12:00',
-    '14:00',
-    '16:00',
-    '18:00',
-    '20:00',
-    '22:00',
-  ];
+const labels = [
+  '00:00',
+  '02:00',
+  '04:00',
+  '06:00',
+  '08:00',
+  '10:00',
+  '12:00',
+  '14:00',
+  '16:00',
+  '18:00',
+  '20:00',
+  '22:00',
+];
+
+export default function WeatherChart() {
+  const { mode } = useContext(ModeContext);
+  const { weatherInfo } = useContext(WeatherInfoContext);
+
+  const tempData = (() => {
+    const arr = [];
+    for (let i = 0; i < weatherInfo.days[0].hours.length; i += 2) {
+      const hour = weatherInfo.days[0].hours[i];
+      arr.push(getTemperature(mode, hour.temp));
+    }
+    return arr;
+  })();
+
+  const humidityData = (() => {
+    const arr = [];
+    for (let i = 0; i < weatherInfo.days[0].hours.length; i += 2) {
+      const hour = weatherInfo.days[0].hours[i];
+      arr.push(hour.humidity);
+    }
+    return arr;
+  })();
+
   return (
     <section className="content-wrapper">
       <h3>Biểu đồ nhiệt độ</h3>
@@ -25,19 +49,12 @@ export default function WeatherChart({ weatherInfo, mode }) {
           datasets: [
             {
               label: `Nhiệt độ ${mode == 'us' ? '°F' : '°C'}`,
-              data: (() => {
-                const arr = [];
-                for (let i = 0; i < weatherInfo.days[0].hours.length; i += 2) {
-                  const hour = weatherInfo.days[0].hours[i];
-                  arr.push(getTemperature(mode, hour.temp));
-                }
-                return arr;
-              })(),
+              data: tempData,
               borderWidth: 1,
               borderColor: '#FF6384',
               backgroundColor: '#FF638480',
               fill: 'start',
-              tension: 0.5
+              tension: 0.5,
             },
           ],
         }}
@@ -50,23 +67,22 @@ export default function WeatherChart({ weatherInfo, mode }) {
           interaction: {
             intersect: false,
           },
+          scales: {
+            y: {
+              suggestedMin: Math.min(...tempData) - 1,
+              suggestedMax: Math.max(...tempData) + 1,
+            },
+          },
         }}
       />
-      <h3 className='my-3'>Biểu đồ độ ẩm</h3>
+      <h3 className="my-3">Biểu đồ độ ẩm</h3>
       <Line
         data={{
           labels: labels,
           datasets: [
             {
               label: 'Độ ẩm %',
-              data: (() => {
-                const arr = [];
-                for (let i = 0; i < weatherInfo.days[0].hours.length; i += 2) {
-                  const hour = weatherInfo.days[0].hours[i];
-                  arr.push(hour.humidity);
-                }
-                return arr;
-              })(),
+              data: humidityData,
               borderWidth: 1,
               tension: 0.4,
               pointRadius: 4,
@@ -85,6 +101,12 @@ export default function WeatherChart({ weatherInfo, mode }) {
           },
           interaction: {
             intersect: false,
+          },
+          scales: {
+            y: {
+              suggestedMin: Math.min(...humidityData) - 1,
+              suggestedMax: Math.max(...humidityData) + 1,
+            },
           },
         }}
       />
