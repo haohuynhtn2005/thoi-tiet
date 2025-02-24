@@ -4,7 +4,7 @@ import { DarkModeContext } from '../components/AppProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import { domain } from '../common/commonVal';
 
-const fallbackNavigate = '/tp-ho-chi-minh';
+const fallbackNavigate = '/chi-tiet/tp-ho-chi-minh';
 
 function useWeatherInfo() {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ function useWeatherInfo() {
     const abortController = new AbortController();
     if (locationCode) {
       fetch(`${domain}/search/${locationCode}`, {
+        signal: abortController.signal,
         mode: 'cors',
       })
         .then(async (response) => {
@@ -30,15 +31,13 @@ function useWeatherInfo() {
             throw new Error(msg);
           }
           setWeatherInfo(await response.json());
+          setLoading(false);
         })
         .catch((e) => {
           if (e.name === 'AbortError') {
             return;
           }
           setError(e);
-        })
-        .finally(() => {
-          setLoading(false);
         });
       return;
     }
@@ -50,8 +49,9 @@ function useWeatherInfo() {
         text: msg,
         icon: 'question',
         theme: darkMode && 'dark',
-      }).then(() => {
-        navigate(fallbackNavigate);
+        willClose: () => {
+          navigate(fallbackNavigate);
+        },
       });
     }
     navigator.geolocation?.getCurrentPosition(
@@ -59,6 +59,7 @@ function useWeatherInfo() {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         fetch(`${domain}/reversegeo/`, {
+          signal: abortController.signal,
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
@@ -75,15 +76,13 @@ function useWeatherInfo() {
               throw new Error(msg);
             }
             setWeatherInfo(await response.json());
+            setLoading(false);
           })
           .catch((e) => {
             if (e.name === 'AbortError') {
               return;
             }
             setError(e);
-          })
-          .finally(() => {
-            setLoading(false);
           });
       },
       () => {
@@ -95,8 +94,9 @@ function useWeatherInfo() {
           reverseButtons: true,
           icon: 'warning',
           theme: darkMode && 'dark',
-        }).then(() => {
-          navigate('/tp-ho-chi-minh');
+          willClose: () => {
+            navigate(fallbackNavigate);
+          },
         });
       }
     );

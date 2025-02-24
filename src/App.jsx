@@ -7,32 +7,12 @@ import Forecast from './components/Forecast.jsx';
 import WeatherChart from './components/WeatherChart';
 import OtherLocations from './components/OtherLocations.jsx';
 import {
-  DarkModeContext,
   WeatherInfoContext,
 } from './components/AppProvider.jsx';
-import { useContext } from 'react';
 import useWeatherInfo from './hooks/useWeatherInfo.js';
-import PropTypes from 'prop-types';
+import Wrapper from './components/Wrapper.jsx';
 
 Chart.register(CategoryScale);
-
-function Wrapper({ children, style }) {
-  const { darkMode } = useContext(DarkModeContext);
-  return (
-    <section
-      data-bs-theme={darkMode ? 'dark' : 'light'}
-      className="text-body bg-body"
-      style={style}
-    >
-      {children}
-    </section>
-  );
-}
-
-Wrapper.propTypes = {
-  children: PropTypes.node,
-  style: PropTypes.object,
-};
 
 function LoadingApp() {
   return (
@@ -87,7 +67,9 @@ function App() {
           className="d-flex align-items-center justify-content-center fs-3 text-danger"
           style={{ minHeight: '100vh' }}
         >
-          {error.message} &nbsp; <i className="bi bi-exclamation-octagon"></i>
+          <div>
+            <i className="bi bi-exclamation-octagon"></i> {error.message}
+          </div>
         </div>
       </Wrapper>
     );

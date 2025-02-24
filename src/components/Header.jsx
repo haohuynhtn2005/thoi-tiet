@@ -34,7 +34,7 @@ export default function Header() {
             options={locationOpts}
             value={''}
             onChange={(selectOption) => {
-              navigate(`/${encodeURI(selectOption.value)}`);
+              navigate(`/chi-tiet/${encodeURI(selectOption.value)}`);
             }}
             placeholder="Tỉnh/Thành phố"
             styles={darkMode && darkThemeSelect}
@@ -72,10 +72,10 @@ export default function Header() {
       <div className="d-sm-flex justify-content-between">
         <div>
           <i className="bi bi-geo-alt-fill"></i> Vị trí:{' '}
-          {weatherInfo.resolvedAddress}
+          {weatherInfo?.resolvedAddress}
         </div>
         <Link
-          to="/"
+          to="/vi-tri-hien-tai"
           className="btn bg-body-tertiary border"
         >
           <i className="bi bi-crosshair"></i> Lấy vị trí hiện tại

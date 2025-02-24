@@ -4,14 +4,19 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import AppProvider from './components/AppProvider.jsx';
+import LocationList from './components/LocationList.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <LocationList />,
+  },
+  {
+    path: '/chi-tiet/:locationCode',
     element: <App />,
   },
   {
-    path: '/:locationCode',
+    path: '/vi-tri-hien-tai',
     element: <App />,
   },
 ]);

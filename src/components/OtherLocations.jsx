@@ -48,7 +48,7 @@ function WeatherOfCity({ city }) {
       >
         <h5>{weatherInfo.resolvedAddress}</h5>
         <img
-          src={`assets/status/${weatherInfo.currentConditions.icon}.svg`}
+          src={`/assets/status/${weatherInfo.currentConditions.icon}.svg`}
           alt=""
           className="m-auto"
           style={{ width: '50%' }}
