@@ -11,6 +11,7 @@ import {
 } from './components/AppProvider.jsx';
 import useWeatherInfo from './hooks/useWeatherInfo.js';
 import Wrapper from './components/Wrapper.jsx';
+import Details from './components/Details.jsx';
 
 Chart.register(CategoryScale);
 
@@ -54,13 +55,12 @@ function LoadingApp() {
 }
 
 function App() {
-  const { loading, error, weatherInfo } = useWeatherInfo();
-  if (loading) {
+  const { status, result } = useWeatherInfo();
+  if (status == 'loading') {
     return <LoadingApp />;
   }
 
-  if (error) {
-    console.warn(error);
+  if (status == 'error') {
     return (
       <Wrapper>
         <div
@@ -68,7 +68,7 @@ function App() {
           style={{ minHeight: '100vh' }}
         >
           <div>
-            <i className="bi bi-exclamation-octagon"></i> {error.message}
+            <i className="bi bi-exclamation-octagon"></i> {result.message}
           </div>
         </div>
       </Wrapper>
@@ -76,11 +76,12 @@ function App() {
   }
 
   return (
-    <WeatherInfoContext.Provider value={{ weatherInfo }}>
+    <WeatherInfoContext.Provider value={{ weatherInfo: result }}>
       <Wrapper>
         <Header />
         <CurrentWeather />
         <Forecast />
+        <Details />
         <WeatherChart />
         <OtherLocations />
       </Wrapper>

@@ -90,7 +90,7 @@ export default function OtherLocations() {
     <div className="content-wrapper">
       <h3>Thời tiết khu vực khác</h3>
       <div className="container-fluid">
-        <div className="row row-cols-2 row-cols-sm-4 g-2">
+        <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3">
           {cities.map((city) => (
             <WeatherOfCity
               key={city}

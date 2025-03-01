@@ -24,7 +24,7 @@ function LoadingLocation() {
         <div className="placeholder-glow mb-1">
           <span className="placeholder col-7" />
         </div>
-        <div className=" row row-cols-2 row-cols-sm-4 g-1 mb-1">
+        <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
           {(() => {
             const arr = [];
             for (let i = 0; i < 12; i++) {
@@ -91,21 +91,21 @@ Location.propTypes = {
 };
 
 export default function LocationList() {
-  const { loading, error, locations } = useRandomLocations();
-  if (loading) {
+  const { status, result } = useRandomLocations();
+  if (status == 'loading') {
     return <LoadingLocation />;
   }
 
-  if (error) {
-    console.warn(error);
-    return <Error message={error.message} />;
+  if (status == 'error') {
+    console.warn(result);
+    return <Error message={result.message} />;
   }
 
   return (
     <Wrapper>
       <Header />
-      <div className="row row-cols-2 row-cols-sm-4 g-2 content-wrapper">
-        {locations.map((location) => {
+      <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3 content-wrapper">
+        {result.map((location) => {
           return (
             <Location
               key={location.code}

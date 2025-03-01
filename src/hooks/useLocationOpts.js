@@ -8,6 +8,7 @@ function useLocationOpts() {
     const abortController = new AbortController();
 
     fetch(`${domain}/getLocationOpts`, {
+      signal: abortController.signal,
       mode: 'cors',
     })
       .then((response) => {

@@ -1,7 +1,7 @@
 @import url(./styles/font-face.css);
 
 :root {
-  --max: 960px;
+  --max: 1280px;
 }
 
 body {
