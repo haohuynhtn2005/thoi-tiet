@@ -80,10 +80,7 @@ function useWeatherInfo() {
           },
           mode: 'cors',
           method: 'POST',
-          body: JSON.stringify({
-            lat,
-            lon,
-          }),
+          body: JSON.stringify({ lat, lon }),
         })
           .then(async (response) => {
             if (response.status >= 400) {
