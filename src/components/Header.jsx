@@ -3,15 +3,15 @@ import Select from 'react-select';
 import darkThemeSelect from '../common/darkThemeSelect.js';
 import {
   DarkModeContext,
+  LocationOpts,
   ModeContext,
   WeatherInfoContext,
 } from './AppProvider.jsx';
 import { useContext } from 'react';
-import useLocationOpts from '../hooks/useLocationOpts.js';
 
 export default function Header() {
   const navigate = useNavigate();
-  const locationOpts = useLocationOpts();
+  const { locationOpts } = useContext(LocationOpts);
   const { mode, setMode } = useContext(ModeContext);
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
   const { weatherInfo } = useContext(WeatherInfoContext);

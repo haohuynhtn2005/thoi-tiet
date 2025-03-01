@@ -2,15 +2,18 @@ import { useEffect, useState } from 'react';
 import { domain } from '../common/commonVal';
 
 function useRandomLocations() {
-  const [locations, setLocations] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const result = { locations, error, loading };
+  const [fetching, setFetching] = useState({
+    status: 'loading',
+    result: null,
+  });
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    setFetching((old) => {
+      return {
+        ...old,
+        status: 'loading',
+      };
+    });
     const abortController = new AbortController();
     fetch(`${domain}/getRandomLocations`, {
       signal: abortController.signal,
@@ -21,22 +24,27 @@ function useRandomLocations() {
           const msg = (await response.json()).message;
           throw new Error(msg);
         }
-        setLocations(await response.json());
-        setLoading(false);
+        setFetching({
+          status: 'loaded',
+          result: await response.json(),
+        });
       })
       .catch((e) => {
         if (e.name === 'AbortError') {
           return;
         }
-        setError(e);
-      })
+        setFetching({
+          result: e,
+          status: 'error',
+        });
+      });
 
     return () => {
       abortController.abort();
     };
   }, []);
 
-  return result;
+  return fetching;
 }
 
 export default useRandomLocations;

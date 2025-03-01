@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { DarkModeContext } from '../components/AppProvider';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,15 +10,23 @@ function useWeatherInfo() {
   const navigate = useNavigate();
   const { locationCode } = useParams();
   const { darkMode } = useContext(DarkModeContext);
-  const [weatherInfo, setWeatherInfo] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const result = { weatherInfo, error, loading };
+  const darkModeRef = useRef(darkMode);
+  const [fetching, setFetching] = useState({
+    status: 'loading',
+    result: null,
+  });
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    darkModeRef.current = darkMode;
+  }, [darkMode]);
+
+  useEffect(() => {
+    setFetching((old) => {
+      return {
+        ...old,
+        status: 'loading',
+      };
+    });
     const abortController = new AbortController();
     if (locationCode) {
       fetch(`${domain}/search/${locationCode}`, {
@@ -26,18 +34,23 @@ function useWeatherInfo() {
         mode: 'cors',
       })
         .then(async (response) => {
-          if (response.status >= 400) {
+          if (!response.ok) {
             const msg = (await response.json()).message;
             throw new Error(msg);
           }
-          setWeatherInfo(await response.json());
-          setLoading(false);
+          setFetching({
+            status: 'loaded',
+            result: await response.json(),
+          });
         })
         .catch((e) => {
           if (e.name === 'AbortError') {
             return;
           }
-          setError(e);
+          setFetching({
+            status: 'error',
+            result: e,
+          });
         });
       return;
     }
@@ -45,15 +58,17 @@ function useWeatherInfo() {
     if (!navigator.geolocation) {
       const msg = 'Trình duyệt không hỗ trợ tìm vị trí';
       Swal.fire({
+        icon: 'question',
         title: 'Vị trí?',
         text: msg,
-        icon: 'question',
-        theme: darkMode && 'dark',
+        confirmButtonColor: '#0d6efd',
+        theme: darkModeRef.current && 'dark',
         willClose: () => {
           navigate(fallbackNavigate);
         },
       });
     }
+
     navigator.geolocation?.getCurrentPosition(
       (position) => {
         const lat = position.coords.latitude;
@@ -65,35 +80,35 @@ function useWeatherInfo() {
           },
           mode: 'cors',
           method: 'POST',
-          body: JSON.stringify({
-            lat,
-            lon,
-          }),
+          body: JSON.stringify({ lat, lon }),
         })
           .then(async (response) => {
             if (response.status >= 400) {
               const msg = (await response.json()).message;
               throw new Error(msg);
             }
-            setWeatherInfo(await response.json());
-            setLoading(false);
+            setFetching({
+              status: 'loaded',
+              result: await response.json(),
+            });
           })
           .catch((e) => {
             if (e.name === 'AbortError') {
               return;
             }
-            setError(e);
+            setFetching({
+              status: 'error',
+              result: e,
+            });
           });
       },
       () => {
         Swal.fire({
+          icon: 'warning',
           title: 'Chưa cho phép truy cập vị trí',
           text: 'Xem thời tiết nơi khác?',
-          confirmButtonText: 'Ok',
           confirmButtonColor: '#0d6efd',
-          reverseButtons: true,
-          icon: 'warning',
-          theme: darkMode && 'dark',
+          theme: darkModeRef.current && 'dark',
           willClose: () => {
             navigate(fallbackNavigate);
           },
@@ -104,9 +119,9 @@ function useWeatherInfo() {
     return () => {
       abortController.abort();
     };
-  }, [locationCode]);
+  }, [locationCode, navigate]);
 
-  return result;
+  return fetching;
 }
 
 export default useWeatherInfo;
