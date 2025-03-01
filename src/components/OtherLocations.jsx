@@ -39,7 +39,7 @@ function WeatherOfCity({ city }) {
 
   return (
     <Link
-      to={`/${encodeURI(city)}`}
+      to={`/chi-tiet/${encodeURI(city)}`}
       className="col"
     >
       <div
