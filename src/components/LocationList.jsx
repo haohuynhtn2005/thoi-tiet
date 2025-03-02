@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import Wrapper from './Wrapper';
-import Error from './Error';
+import ErrorComponent from './ErrorComponent';
 import { getTemperatureString } from '../common/utils';
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { ModeContext } from './AppProvider';
 import useRandomLocations from '../hooks/useRandomLocations';
 import PropTypes from 'prop-types';
@@ -16,7 +16,10 @@ function LoadingLocation() {
         style={{ minHeight: '100vh' }}
       >
         <div className="placeholder-glow mb-1">
-          <span className="placeholder col-12" style={{height: '2em'}} />
+          <span
+            className="placeholder col-12"
+            style={{ height: '2em' }}
+          />
         </div>
         <div className="placeholder-glow mb-1">
           <span className="placeholder col-3" />
@@ -29,7 +32,10 @@ function LoadingLocation() {
             const arr = [];
             for (let i = 0; i < 12; i++) {
               arr.push(
-                <div key={i} className='placeholder-glow col'>
+                <div
+                  key={i}
+                  className="placeholder-glow col"
+                >
                   <div
                     className="placeholder col-12"
                     style={{ height: '12em' }}
@@ -98,22 +104,24 @@ export default function LocationList() {
 
   if (status == 'error') {
     console.warn(result);
-    return <Error message={result.message} />;
+    return <ErrorComponent message={result.message} />;
   }
 
   return (
-    <Wrapper>
-      <Header />
-      <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3 content-wrapper">
-        {result.map((location) => {
-          return (
-            <Location
-              key={location.code}
-              location={location}
-            />
-          );
-        })}
+    <Fragment>
+      <div className='p-2'>
+        <Header />
+        <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3 content-wrapper">
+          {result.map((location) => {
+            return (
+              <Location
+                key={location.code}
+                location={location}
+              />
+            );
+          })}
+        </div>
       </div>
-    </Wrapper>
+    </Fragment>
   );
 }
