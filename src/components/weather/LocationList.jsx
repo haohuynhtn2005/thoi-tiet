@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Wrapper from './Wrapper';
-import ErrorComponent from './ErrorComponent';
-import { getTemperatureString } from '../common/utils';
+import Wrapper from '../Wrapper.jsx';
+import ErrorPage from '../../pages/ErrorPage.jsx';
+import { getTemperatureString } from '../../common/utils.js';
 import { Fragment, useContext } from 'react';
-import { ModeContext } from './AppProvider';
-import useRandomLocations from '../hooks/useRandomLocations';
+import { ModeContext } from '../../providers/AppProvider.jsx';
+import useRandomLocations from '../../hooks/useRandomLocations.js';
 import PropTypes from 'prop-types';
 
 function LoadingLocation() {
@@ -104,12 +104,12 @@ export default function LocationList() {
 
   if (status == 'error') {
     console.warn(result);
-    return <ErrorComponent message={result.message} />;
+    return <ErrorPage message={result.message} />;
   }
 
   return (
     <Fragment>
-      <div className='p-2'>
+      <div className="p-2">
         <Header />
         <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3 content-wrapper">
           {result.map((location) => {

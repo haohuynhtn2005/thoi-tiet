@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
-import { DarkModeContext } from '../components/AppProvider';
+import { DarkModeContext } from '../providers/AppProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import { domain } from '../common/commonVal';
 

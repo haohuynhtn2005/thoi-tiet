@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getTemperatureString } from '../common/utils.js';
-import { ModeContext } from './AppProvider.jsx';
+import { getTemperatureString } from '../../common/utils.js';
+import { ModeContext } from '../../providers/AppProvider.jsx';
 import PropTypes from 'prop-types';
-import { domain } from '../common/commonVal.js';
+import { domain } from '../../common/commonVal.js';
 
 function WeatherOfCity({ city }) {
   const { mode } = useContext(ModeContext);
@@ -76,7 +76,7 @@ WeatherOfCity.propTypes = {
 export default function Details() {
   return (
     <div className="content-wrapper">
-      <h3>Thời tiết khu vực khác</h3>
+      <h3>Chi tiết</h3>
       <div className="container-fluid">
         <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3">
           <div className="col">

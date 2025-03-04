@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
+import Wrapper from '../components/Wrapper';
 
-export default function ErrorComponent({ message }) {
+export default function ErrorPage({ message }) {
   return (
     <Wrapper>
       <div
@@ -16,6 +16,6 @@ export default function ErrorComponent({ message }) {
   );
 }
 
-ErrorComponent.propTypes = {
+ErrorPage.propTypes = {
   message: PropTypes.string,
 };
