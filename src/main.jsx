@@ -3,17 +3,18 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
-import AppProvider from './components/AppProvider.jsx';
-import LocationList from './components/LocationList.jsx';
-import ErrorComponent from './components/ErrorComponent.jsx';
-import ShowWeather from './components/ShowWeather.jsx';
-import Manage from './components/Manage.jsx';
+import AppProvider from './providers/AppProvider.jsx';
+import LocationList from './components/weather/LocationList.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
+import ShowWeather from './components/weather/ShowWeather.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Login from './pages/Login.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorComponent message='404 not found' />,
+    errorElement: <ErrorPage message="404 not found" />,
     children: [
       { index: true, element: <LocationList /> },
       { path: '/vi-tri-hien-tai', element: <ShowWeather /> },
@@ -21,9 +22,13 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/manage',
-    element: <Manage />
-  }
+    path: '/quan-ly',
+    element: <Dashboard />,
+  },
+  {
+    path: '/dang-nhap',
+    element: <Login />,
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(

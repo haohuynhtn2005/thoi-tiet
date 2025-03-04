@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { DarkModeContext } from './AppProvider';
+import { DarkModeContext } from '../providers/AppProvider';
 
 export default function Wrapper({ children, style }) {
   const { darkMode } = useContext(DarkModeContext);

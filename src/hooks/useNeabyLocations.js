@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { domain } from '../common/commonVal';
-import { WeatherInfoContext } from '../components/AppProvider';
+import { WeatherInfoContext } from '../App.jsx';
 
 function useNearbyLocations() {
   const { weatherInfo } = useContext(WeatherInfoContext);

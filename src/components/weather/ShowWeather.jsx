@@ -4,9 +4,9 @@ import Forecast from './Forecast';
 import Details from './Details';
 import WeatherChart from './WeatherChart';
 import OtherLocations from './OtherLocations';
-import useWeatherInfo from '../hooks/useWeatherInfo';
-import ErrorComponent from './ErrorComponent';
-import { WeatherInfoContext } from './AppProvider';
+import useWeatherInfo from '../../hooks/useWeatherInfo.js';
+import ErrorPage from '../../pages/ErrorPage.jsx';
+import { WeatherInfoContext } from '../../App.jsx';
 
 function LoadingShowWeather() {
   return (
@@ -53,12 +53,14 @@ export default function ShowWeather() {
   }
 
   if (status == 'error') {
-    return <ErrorComponent message={result.message} />;
+    return <ErrorPage message={result.message} />;
   }
+
+  console.warn(status);
 
   return (
     <WeatherInfoContext.Provider value={{ weatherInfo: result }}>
-      <div className='p-2'>
+      <div className="p-2">
         <Header />
         <CurrentWeather />
         <Forecast />
