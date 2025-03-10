@@ -11,7 +11,7 @@ import { WeatherInfoContext } from '../../App.jsx';
 function LoadingShowWeather() {
   return (
     <div
-      className="bg-body-tertiary content-wrapper"
+      className="content-wrapper"
       style={{ minHeight: '100vh' }}
     >
       <div className="placeholder-glow mb-1">
@@ -55,8 +55,6 @@ export default function ShowWeather() {
   if (status == 'error') {
     return <ErrorPage message={result.message} />;
   }
-
-  console.warn(status);
 
   return (
     <WeatherInfoContext.Provider value={{ weatherInfo: result }}>

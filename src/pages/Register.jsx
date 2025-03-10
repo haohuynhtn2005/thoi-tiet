@@ -3,11 +3,13 @@ import { domain } from '../common/commonVal';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../providers/AppProvider';
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
   const [message, setMessage] = useState('');
   const { fetchUser } = useContext(UserContext);
@@ -18,8 +20,12 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.confirmPassword != formData.password) {
+      setMessage('Xac nhan mat khau khong khop')
+      return
+    }
     try {
-      const res = await fetch(`${domain}/login`, {
+      const res = await fetch(`${domain}/register`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -27,17 +33,17 @@ export default function Login() {
         body: JSON.stringify(formData),
         credentials: 'include',
       });
-      if (res.status == 400) {
-        return setMessage((await res.json()).message);
-      } else if (!res.ok) {
-        throw new Error((await res.json()).message);
+      if (!res.ok) {
+        const rs = await res.json()
+        const e = new Error(rs.error);
+        e.response = rs;
+        throw e;
       }
       fetchUser();
-      // const data = await response.json();
-      // console.log(data);
-      navigate('/');
+      setMessage('Dang ky thanh cong')
+      // navigate('/');
     } catch (e) {
-      console.log('Loi dang nhap', e);
+      console.error('Loi dang ky', {...e});
       setMessage(e.message);
     }
   };
@@ -48,12 +54,31 @@ export default function Login() {
         <div className="col-md-6 col-lg-4">
           <div className="card shadow">
             <div className="card-body p-4">
-              <h2 className="card-title text-center mb-4">Login</h2>
+              <h2 className="card-title text-center mb-4">Đăng ký</h2>
               <form
                 action={`${domain}/login`}
                 method="POST"
                 onSubmit={handleSubmit}
               >
+                {/* Name input */}
+                <div className="mb-3">
+                  <label
+                    htmlFor="name"
+                    className="form-label"
+                  >
+                    Tên
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Tên người dùng"
+                    value={formData.name}
+                    onChange={handleChange}
+                    autoComplete="on"
+                  />
+                </div>
                 {/* Email input */}
                 <div className="mb-3">
                   <label
@@ -70,7 +95,7 @@ export default function Login() {
                     placeholder="name@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    autoComplete='on'
+                    autoComplete="on"
                   />
                 </div>
                 {/* Password input */}
@@ -89,32 +114,29 @@ export default function Login() {
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleChange}
-                    autoComplete='current-passoword'
+                    autoComplete="current-passoword"
                   />
-                  <div className="form-text mt-2">
-                    <a
-                      href="#"
-                      className="text-decoration-none"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
                 </div>
-                {/* Remember me checkbox */}
-                <div className="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="rememberMe"
-                    defaultChecked
-                  />
+                {/* confirm password input */}
+                <div className="mb-3">
                   <label
-                    className="form-check-label"
-                    htmlFor="rememberMe"
+                    htmlFor="confirmPassword"
+                    className="form-label"
                   >
-                    Remember me
+                    Confirm password
                   </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirm password"
+                    autoComplete="current-passoword"
+                  />
                 </div>
+
                 <div className=" text-danger">{message}</div>
                 {/* Submit button */}
                 <div className="d-grid gap-2">
@@ -122,7 +144,7 @@ export default function Login() {
                     type="submit"
                     className="btn btn-primary"
                   >
-                    Login
+                    Dang ky
                   </button>
                 </div>
                 {/* Sign up link */}
@@ -130,10 +152,10 @@ export default function Login() {
                   <p className="mb-0">
                     Don&apos;t have an account?{' '}
                     <a
-                      href="#"
+                      href="/dang-nhap"
                       className="text-decoration-none"
                     >
-                      Sign up
+                      Dang nhap
                     </a>
                   </p>
                 </div>

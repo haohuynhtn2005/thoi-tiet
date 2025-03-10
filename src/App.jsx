@@ -16,7 +16,14 @@ function App() {
   const locationOpts = useLocationOpts();
 
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundImage: 'url(/assets/background/overlay.jpg)',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <Navbar />
       <WeatherInfoContext.Provider value={{}}>
         <LocationOptsContext.Provider value={{ locationOpts }}>

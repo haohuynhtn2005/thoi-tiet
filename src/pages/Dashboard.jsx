@@ -23,63 +23,261 @@ function SidebarContent() {
         />
       </div>
       <div className="offcanvas-body">
-        <Link
-          to="/"
-          className="d-block p-2 rounded"
-        >
-          <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
-        </Link>
-        <Link
-          to="/dashboard/chart"
-          className="d-block p-2 rounded"
-        >
-          <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
-        </Link>
-        <Link
-          to="/dashboard/chart"
-          className="d-block p-2 rounded"
-        >
-          <i className="bi bi-person-fill"></i>&nbsp;Người dùng
-        </Link>
-        <Link
-          to="/dashboard/chart"
-          className="d-block p-2 rounded"
-        >
-          <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
-        </Link>
-        <Link
-          to="/dashboard/chart"
-          className="d-block p-2 rounded"
-        >
-          <i className="bi bi-newspaper"></i>&nbsp;Tin tức
-        </Link>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-person-fill"></i>&nbsp;Người dùng
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-newspaper"></i>&nbsp;Tin tức
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-person-fill"></i>&nbsp;Người dùng
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-newspaper"></i>&nbsp;Tin tức
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-person-fill"></i>&nbsp;Người dùng
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-newspaper"></i>&nbsp;Tin tức
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-person-fill"></i>&nbsp;Người dùng
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-newspaper"></i>&nbsp;Tin tức
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-person-fill"></i>&nbsp;Người dùng
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-newspaper"></i>&nbsp;Tin tức
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-house-fill"></i>&nbsp;Trang chủ
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-clipboard-data-fill"></i>&nbsp;Thống kê
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-person-fill"></i>&nbsp;Người dùng
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
+          </Link>
+        </div>
+        <div data-bs-dismiss="offcanvas">
+          <Link
+            to="/dashboard/chart"
+            className="d-block p-2 rounded"
+          >
+            <i className="bi bi-newspaper"></i>&nbsp;Tin tức
+          </Link>
+        </div>
       </div>
     </Fragment>
   );
 }
 
 export default function Dashboard() {
-  
-  
   return (
     <div className={styles.layout}>
-      {/* Sidebar offcanvas */}
+      {/* Sidebar */}
       <div
-        className="offcanvas offcanvas-md1 offcanvas-start text-white"
+        className={`dash offcanvas offcanvas-start text-white ${styles.sidebar}`}
         data-bs-backdrop="static"
         tabIndex={-1}
         id="staticBackdrop"
         aria-labelledby="staticBackdropLabel"
-        style={{
-          backgroundColor: '#4e73df',
-        }}
-      >
-        <SidebarContent />
-      </div>
-
-      {/* Sidebar show on lg */}
-      <div
-        className="d-none d-lg-block text-white overflow-y-auto p-3"
         style={{
           gridArea: '1 / 1 / 3 / 2',
           backgroundColor: '#4e73df',

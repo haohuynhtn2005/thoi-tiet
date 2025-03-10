@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { domain } from '../common/commonVal';
-import { useNavigate } from 'react-router-dom';
+import ResponseErr from '../errors/ResponseErr';
 
 export default function useUser() {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [startFetch, setStartFetch] = useState(true);
+  const [startFetchUser, setStartFetchUser] = useState(false);
 
   const fetchUser = useCallback(() => {
-    setStartFetch((old) => !old);
+    setStartFetchUser((old) => !old);
   }, []);
 
   useEffect(() => {
@@ -21,23 +20,24 @@ export default function useUser() {
         });
         if (!res.ok) {
           const message = (await res.json()).message;
-          throw new Error(message);
+          throw new ResponseErr(message, res.status);
         }
         const data = await res.json();
         setUser(data);
-        navigate('/');
       } catch (e) {
         if (e.name === 'AbortError') {
           return;
         }
+        if (e.name != 'ResponseErr') {
+          console.error('Loi lay nguoi dung', e.name);
+        }
         setUser(null);
-        console.error('Loi lay nguoi dung', e);
       }
     })();
     return () => {
       abortController.abort();
     };
-  }, [navigate, startFetch]);
+  }, [startFetchUser]);
 
   return { user, fetchUser };
 }

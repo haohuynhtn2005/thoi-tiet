@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Wrapper from '../Wrapper.jsx';
 import ErrorPage from '../../pages/ErrorPage.jsx';
 import { getTemperatureString } from '../../common/utils.js';
 import { Fragment, useContext } from 'react';
@@ -10,44 +9,42 @@ import PropTypes from 'prop-types';
 
 function LoadingLocation() {
   return (
-    <Wrapper>
-      <div
-        className="bg-body-tertiary content-wrapper"
-        style={{ minHeight: '100vh' }}
-      >
-        <div className="placeholder-glow mb-1">
-          <span
-            className="placeholder col-12"
-            style={{ height: '2em' }}
-          />
-        </div>
-        <div className="placeholder-glow mb-1">
-          <span className="placeholder col-3" />
-        </div>
-        <div className="placeholder-glow mb-1">
-          <span className="placeholder col-7" />
-        </div>
-        <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
-          {(() => {
-            const arr = [];
-            for (let i = 0; i < 12; i++) {
-              arr.push(
-                <div
-                  key={i}
-                  className="placeholder-glow col"
-                >
-                  <div
-                    className="placeholder col-12"
-                    style={{ height: '12em' }}
-                  />
-                </div>
-              );
-            }
-            return arr;
-          })()}
-        </div>
+    <section
+      className="content-wrapper"
+      style={{ minHeight: '100vh' }}
+    >
+      <div className="placeholder-glow mb-1">
+        <span
+          className="placeholder col-12"
+          style={{ height: '2em' }}
+        />
       </div>
-    </Wrapper>
+      <div className="placeholder-glow mb-1">
+        <span className="placeholder col-3" />
+      </div>
+      <div className="placeholder-glow mb-1">
+        <span className="placeholder col-7" />
+      </div>
+      <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
+        {(() => {
+          const arr = [];
+          for (let i = 0; i < 12; i++) {
+            arr.push(
+              <div
+                key={i}
+                className="placeholder-glow col"
+              >
+                <div
+                  className="placeholder col-12"
+                  style={{ height: '12em' }}
+                />
+              </div>
+            );
+          }
+          return arr;
+        })()}
+      </div>
+    </section>
   );
 }
 
@@ -109,9 +106,9 @@ export default function LocationList() {
 
   return (
     <Fragment>
-      <div className="p-2">
+      <div className="container-fluid content-wrapper">
         <Header />
-        <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3 content-wrapper">
+        <div className="row row-cols-2 row-cols-sm-4 g-2">
           {result.map((location) => {
             return (
               <Location

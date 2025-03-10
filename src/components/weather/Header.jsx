@@ -13,7 +13,7 @@ export default function Header() {
   const { weatherInfo } = useContext(WeatherInfoContext);
 
   return (
-    <section className="content-wrapper">
+    <section className="content-wrapper mb-2">
       <div className="d-flex flex-column flex-sm-row gap-1 mb-2">
         <Link
           to="/"
