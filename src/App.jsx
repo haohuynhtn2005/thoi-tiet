@@ -18,7 +18,7 @@ function App() {
   return (
     <Wrapper
       style={{
-        backgroundImage: 'url(/assets/background/overlay.jpg)',
+        // backgroundImage: 'url(/assets/background/overlay.jpg)',
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
