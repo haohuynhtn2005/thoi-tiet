@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <section className="content-wrapper mb-2">
       <div className="d-flex flex-column flex-sm-row gap-1 mb-2">
-        <Link
+        {/* <Link
           to="/"
           className="flex-shrink-0 me-1"
         >
@@ -24,7 +24,7 @@ export default function Header() {
             alt="Logo"
             style={{ height: '2em' }}
           />
-        </Link>
+        </Link> */}
         <div style={{ flex: 1 }}>
           <Select
             options={locationOpts}

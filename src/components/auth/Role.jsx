@@ -1,9 +1,8 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { DarkModeContext, UserContext } from '../../providers/AppProvider';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
-import { callback } from 'chart.js/helpers';
 
 function Loading() {
   return (
