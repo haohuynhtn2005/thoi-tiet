@@ -37,6 +37,7 @@ img {
 /* WebKit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
   /* scrollbar-width: thin; */
 }
 ::-webkit-scrollbar-track {

@@ -70,7 +70,7 @@ export default function Login() {
                     placeholder="name@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    autoComplete='on'
+                    autoComplete="on"
                   />
                 </div>
                 {/* Password input */}
@@ -89,7 +89,7 @@ export default function Login() {
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleChange}
-                    autoComplete='current-passoword'
+                    autoComplete="current-passoword"
                   />
                   <div className="form-text mt-2">
                     <a

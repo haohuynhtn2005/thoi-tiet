@@ -42,7 +42,7 @@ export default function WeatherChart() {
   })();
 
   return (
-    <section className="content-wrapper">
+    <section>
       <h3>Biểu đồ nhiệt độ</h3>
       <Line
         data={{

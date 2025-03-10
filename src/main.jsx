@@ -1,6 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 import './index.css';
 import App from './App.jsx';
 import AppProvider from './providers/AppProvider.jsx';
@@ -11,6 +14,8 @@ import Dashboard from './pages/Dashboard.jsx';
 import Login from './pages/Login.jsx';
 import Role from './components/auth/Role.jsx';
 import Register from './pages/Register.jsx';
+import Overview from './components/dash/Overview.jsx';
+import LocationDash from './components/dash/LocationDash.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +37,10 @@ const router = createBrowserRouter([
         Comp={Dashboard}
       />
     ),
-    children: [{ index: true, element: <Dashboard /> }],
+    children: [
+      { index: true, element: <Overview /> },
+      { path: 'khu-vuc', element: <LocationDash /> },
+    ],
   },
   {
     path: '/dang-nhap',

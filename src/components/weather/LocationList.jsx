@@ -1,11 +1,13 @@
+import styles from '../../styles/layout.module.css';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import ErrorPage from '../../pages/ErrorPage.jsx';
 import { getTemperatureString } from '../../common/utils.js';
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { ModeContext } from '../../providers/AppProvider.jsx';
 import useRandomLocations from '../../hooks/useRandomLocations.js';
 import PropTypes from 'prop-types';
+import NewsCategories from './News.jsx';
 
 function LoadingLocation() {
   return (
@@ -25,24 +27,26 @@ function LoadingLocation() {
       <div className="placeholder-glow mb-1">
         <span className="placeholder col-7" />
       </div>
-      <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
-        {(() => {
-          const arr = [];
-          for (let i = 0; i < 12; i++) {
-            arr.push(
-              <div
-                key={i}
-                className="placeholder-glow col"
-              >
+      <div className="container-fluid">
+        <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
+          {(() => {
+            const arr = [];
+            for (let i = 0; i < 12; i++) {
+              arr.push(
                 <div
-                  className="placeholder col-12"
-                  style={{ height: '12em' }}
-                />
-              </div>
-            );
-          }
-          return arr;
-        })()}
+                  key={i}
+                  className="placeholder-glow col"
+                >
+                  <div
+                    className="placeholder col-12"
+                    style={{ height: '12em' }}
+                  />
+                </div>
+              );
+            }
+            return arr;
+          })()}
+        </div>
       </div>
     </section>
   );
@@ -105,20 +109,25 @@ export default function LocationList() {
   }
 
   return (
-    <Fragment>
-      <div className="container-fluid content-wrapper">
+    <div className={styles.mainLayout}>
+      <div className="p-2">
         <Header />
-        <div className="row row-cols-2 row-cols-sm-4 g-2">
-          {result.map((location) => {
-            return (
-              <Location
-                key={location.code}
-                location={location}
-              />
-            );
-          })}
+        <div className="container-fluid">
+          <div className="row row-cols-2 row-cols-sm-4 g-2">
+            {result.map((location) => {
+              return (
+                <Location
+                  key={location.code}
+                  location={location}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-    </Fragment>
+      <div className="p-2">
+        <NewsCategories />
+      </div>
+    </div>
   );
 }

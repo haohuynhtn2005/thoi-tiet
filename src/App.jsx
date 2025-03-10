@@ -1,14 +1,15 @@
 import './App.css';
+import styles from './styles/layout.module.css';
+import { createContext } from 'react';
+import { Outlet } from 'react-router-dom';
 import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js/auto';
 import Wrapper from './components/Wrapper.jsx';
-import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
-import { createContext } from 'react';
 import useLocationOpts from './hooks/useLocationOpts.js';
+import AdPopup from './components/weather/AdPopup.jsx';
 
 Chart.register(CategoryScale);
-
 const LocationOptsContext = createContext(null);
 const WeatherInfoContext = createContext(null);
 
@@ -16,21 +17,25 @@ function App() {
   const locationOpts = useLocationOpts();
 
   return (
-    <Wrapper
-      style={{
-        backgroundImage: 'url(/assets/background/overlay.jpg)',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <Navbar />
+    <div>
+      <AdPopup />
+
       <WeatherInfoContext.Provider value={{}}>
         <LocationOptsContext.Provider value={{ locationOpts }}>
-          <Outlet />
+          <div
+            className="d-grid"
+            style={{ height: '100vh', gridTemplateRows: 'auto 1fr' }}
+          >
+            <div>
+              <Navbar />
+            </div>
+            <div className="overflow-auto">
+              <Outlet />
+            </div>
+          </div>
         </LocationOptsContext.Provider>
       </WeatherInfoContext.Provider>
-    </Wrapper>
+    </div>
   );
 }
 

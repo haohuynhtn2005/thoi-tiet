@@ -40,9 +40,9 @@ export default function Forecast() {
   const { weatherInfo } = useContext(WeatherInfoContext);
 
   return (
-    <section className="content-wrapper">
+    <section>
       <h3>Dự báo</h3>
-      <div className="">
+      <div className="container-fluid">
         <div className="row row-cols-sm-4 row-cols-2 g-2">
           {(() => {
             const arr = [];
