@@ -1,20 +1,23 @@
 import { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import useDarkMode from '../hooks/useDarkMode';
+import useUser from '../hooks/useUser';
 
-// const WeatherInfoContext = createContext(null);
 const ModeContext = createContext(null);
 const DarkModeContext = createContext(null);
+const UserContext = createContext(null);
 
 function AppProvider({ children }) {
   const [mode, setMode] = useState('metric');
   const [darkMode, setDarkMode] = useDarkMode();
+  const { user, fetchUser } = useUser();
 
   return (
     <ModeContext.Provider value={{ mode, setMode }}>
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-        {/* <WeatherInfoContext.Provider value={{ weatherInfo }}> */}
-            {children}
+        <UserContext.Provider value={{ user, fetchUser }}>
+          {children}
+        </UserContext.Provider>
       </DarkModeContext.Provider>
     </ModeContext.Provider>
   );
@@ -25,4 +28,4 @@ AppProvider.propTypes = {
 };
 
 export default AppProvider;
-export { ModeContext, DarkModeContext };
+export { ModeContext, DarkModeContext, UserContext };

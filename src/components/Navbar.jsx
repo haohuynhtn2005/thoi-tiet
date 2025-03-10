@@ -1,23 +1,20 @@
 import { Link } from 'react-router-dom';
-import useUser from '../hooks/useUser';
 import { domain } from '../common/commonVal';
-
-function useLogout() {
-  const { fetchUser } = useUser();
-}
+import { useContext } from 'react';
+import { UserContext } from '../providers/AppProvider';
 
 export default function Navbar() {
-  const { user, fetchUser } = useUser();
+  const { user, fetchUser } = useContext(UserContext);
 
   const logout = async () => {
     try {
       const response = await fetch(`${domain}/logout`, {
-        mode: 'no-cors',
+        mode: 'cors',
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
       });
       if (response.status >= 400) {
         throw new Error((await response.json()).message);
@@ -42,6 +39,12 @@ export default function Navbar() {
           className="btn bg-body-secondary"
         >
           Đăng ký
+        </Link>
+        <Link
+          to="/quan-ly"
+          className="btn bg-body-secondary"
+        >
+          Quản lý
         </Link>
       </div>
     );

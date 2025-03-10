@@ -9,6 +9,8 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import ShowWeather from './components/weather/ShowWeather.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Login from './pages/Login.jsx';
+import Role from './components/auth/Role.jsx';
+import Register from './pages/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,11 +25,22 @@ const router = createBrowserRouter([
   },
   {
     path: '/quan-ly',
-    element: <Dashboard />,
+    element: (
+      <Role
+        allowedRoles={['staff', 'admin']}
+        loginRedirect="/dang-nhap"
+        Comp={Dashboard}
+      />
+    ),
+    children: [{ index: true, element: <Dashboard /> }],
   },
   {
     path: '/dang-nhap',
     element: <Login />,
+  },
+  {
+    path: '/dang-ky',
+    element: <Register />,
   },
 ]);
 

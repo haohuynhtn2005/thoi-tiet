@@ -19,14 +19,14 @@ function useRandomLocations() {
       signal: abortController.signal,
       mode: 'cors',
     })
-      .then(async (response) => {
-        if (response.status >= 400) {
-          const msg = (await response.json()).message;
+      .then(async (res) => {
+        if (!res.ok) {
+          const msg = (await res.json()).message;
           throw new Error(msg);
         }
         setFetching({
           status: 'loaded',
-          result: await response.json(),
+          result: await res.json(),
         });
       })
       .catch((e) => {

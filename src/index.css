@@ -1,7 +1,7 @@
 @import url(./styles/font-face.css);
 
 :root {
-  --max: 1280px;
+  --max: 960px;
   --blue: #4e73df;
 }
 
@@ -32,4 +32,28 @@ img {
 .content-wrapper {
   max-width: var(--max);
   margin: auto;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  /* scrollbar-width: thin; */
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.dash .offcanvas-body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.dash .offcanvas-body::-webkit-scrollbar-thumb {
+  background: #7b9cff;
+  border-radius: 10px;
+}
+.dash .offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background: #7295ff;
 }

@@ -6,6 +6,19 @@
 
 @media screen and (width >= 992px) {
   .layout {
+    grid-template-columns: 25fr 75fr;
+  }
+
+  .sidebar {
+    position: static;
+    visibility: visible;
+    width: unset !important;
+    transform: translateX(0) !important;
+  }
+}
+
+@media screen and (width >= 1200px) {
+  .layout {
     grid-template-columns: 20fr 80fr;
   }
 }
