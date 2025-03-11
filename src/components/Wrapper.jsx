@@ -7,8 +7,8 @@ export default function Wrapper({ children, style, ...props }) {
   return (
     <section
       {...props}
-      data-bs-theme={darkMode ? 'dark' : 'light'}
-      className="text-body bg-body"
+      // data-bs-theme={darkMode ? 'dark' : 'light'}
+      // className="text-body bg-body"
       style={style}
     >
       {children}

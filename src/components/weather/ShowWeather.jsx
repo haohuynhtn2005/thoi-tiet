@@ -7,6 +7,7 @@ import OtherLocations from './OtherLocations';
 import useWeatherInfo from '../../hooks/useWeatherInfo.js';
 import ErrorPage from '../../pages/ErrorPage.jsx';
 import { WeatherInfoContext } from '../../App.jsx';
+import NewsCategories from './News.jsx';
 
 function LoadingShowWeather() {
   return (
@@ -58,13 +59,27 @@ export default function ShowWeather() {
 
   return (
     <WeatherInfoContext.Provider value={{ weatherInfo: result }}>
-      <div className="p-2">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="position-fixed top-0 start-0 w-100 h-100 object-fit-cover"
+        style={{zIndex: -1}}
+      >
+        <source
+          src={'/assets/video/fog.mp4'}
+          type="video/mp4"
+        />
+      </video>
+      <div className="p-2 position-relative" style={{zIndex: 1}}>
         <Header />
         <CurrentWeather />
         <Forecast />
         <Details />
         <WeatherChart />
         <OtherLocations />
+        <NewsCategories />
       </div>
     </WeatherInfoContext.Provider>
   );
