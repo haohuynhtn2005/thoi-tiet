@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { domain } from '../common/commonVal';
 import { useContext } from 'react';
-import { UserContext } from '../providers/AppProvider';
+import { DarkModeContext, UserContext } from '../providers/AppProvider';
 
 export default function Navbar() {
   const { user, fetchUser } = useContext(UserContext);
-
+  const { darkMode } = useContext(DarkModeContext)
+ 
   const logout = async () => {
     try {
       const response = await fetch(`${domain}/logout`, {
@@ -26,13 +27,20 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary border-3 border-bottom shadow-sm mb-2">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary border-3 border-bottom shadow-sm">
       <div className="container-fluid">
         <a
           className="navbar-brand"
           href="#"
         >
-          Wea
+          
+          <img
+            src={darkMode ? '/assets/logo-dark.svg' : '/assets/logo.svg'}
+            alt="Logo"
+            className=' h-100'
+            // style={{ height: '2em' }}
+          />
+          {/* Wea */}
         </a>
         <button
           className="navbar-toggler"

@@ -58,7 +58,7 @@ export default function OtherLocations() {
   const nearbyLocations = useNearbyLocations();
 
   return (
-    <div className="content-wrapper">
+    <div>
       <h3>Thời tiết khu vực lân cận</h3>
       <div className="container-fluid">
         <div className="row row-cols-2 row-cols-sm-4 g-2 g-lg-3">

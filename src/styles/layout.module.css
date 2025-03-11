@@ -1,0 +1,21 @@
+.mainLayout {
+  /* display: grid; */
+  height: 100%;
+}
+
+@media screen and (width >= 992px) {
+  .mainLayout {
+    display: grid;
+    grid-template-columns: 75fr 25fr;
+  }
+
+  .mainLayout > * {
+    overflow: auto;
+  }
+}
+
+@media screen and (width >= 1200px) {
+  .appLayout {
+    grid-template-columns: 80fr 20fr;
+  }
+}

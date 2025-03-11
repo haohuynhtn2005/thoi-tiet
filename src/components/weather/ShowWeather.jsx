@@ -1,3 +1,4 @@
+import styles from '../../styles/layout.module.css';
 import Header from './Header';
 import CurrentWeather from './CurrentWeather';
 import Forecast from './Forecast';
@@ -65,21 +66,25 @@ export default function ShowWeather() {
         muted
         playsInline
         className="position-fixed top-0 start-0 w-100 h-100 object-fit-cover"
-        style={{zIndex: -1}}
+        style={{ zIndex: -1 }}
       >
         <source
           src={'/assets/video/fog.mp4'}
           type="video/mp4"
         />
       </video>
-      <div className="p-2 position-relative" style={{zIndex: 1}}>
-        <Header />
-        <CurrentWeather />
-        <Forecast />
-        <Details />
-        <WeatherChart />
-        <OtherLocations />
-        <NewsCategories />
+      <div className={styles.mainLayout}>
+        <div className="p-2">
+          <Header />
+          <CurrentWeather />
+          <Forecast />
+          <Details />
+          <WeatherChart />
+          <OtherLocations />
+        </div>
+        <div className="p-2">
+          <NewsCategories />
+        </div>
       </div>
     </WeatherInfoContext.Provider>
   );

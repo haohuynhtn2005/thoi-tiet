@@ -1,4 +1,5 @@
 import './App.css';
+import styles from './styles/layout.module.css';
 import { createContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Chart } from 'chart.js/auto';
@@ -16,16 +17,25 @@ function App() {
   const locationOpts = useLocationOpts();
 
   return (
-    <Wrapper>
+    <div>
       <AdPopup />
 
-      <Navbar />
       <WeatherInfoContext.Provider value={{}}>
         <LocationOptsContext.Provider value={{ locationOpts }}>
-          <Outlet />
+          <div
+            className="d-grid"
+            style={{ height: '100vh', gridTemplateRows: 'auto 1fr' }}
+          >
+            <div>
+              <Navbar />
+            </div>
+            <div className="overflow-auto">
+              <Outlet />
+            </div>
+          </div>
         </LocationOptsContext.Provider>
       </WeatherInfoContext.Provider>
-    </Wrapper>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ export default function CurrentWeather() {
   const { weatherInfo } = useContext(WeatherInfoContext);
 
   return (
-    <section className="content-wrapper">
+    <section>
       <div className=" d-flex flex-column flex-lg-row1 gap-3">
         <div
           className="bg-body-tertiary mb-3 mb-md-0 p-3 rounded-3"
@@ -103,7 +103,7 @@ export default function CurrentWeather() {
             style={{
               aspectRatio: '3/2',
               width: '100%',
-              minHeight: '300%',
+              maxHeight: '500px',
             }}
           ></iframe>
         </div>

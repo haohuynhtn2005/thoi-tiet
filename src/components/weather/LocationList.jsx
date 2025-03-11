@@ -1,11 +1,13 @@
+import styles from '../../styles/layout.module.css';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import ErrorPage from '../../pages/ErrorPage.jsx';
 import { getTemperatureString } from '../../common/utils.js';
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { ModeContext } from '../../providers/AppProvider.jsx';
 import useRandomLocations from '../../hooks/useRandomLocations.js';
 import PropTypes from 'prop-types';
+import NewsCategories from './News.jsx';
 
 function LoadingLocation() {
   return (
@@ -105,20 +107,25 @@ export default function LocationList() {
   }
 
   return (
-    <Fragment>
-      <div className="container-fluid content-wrapper">
+    <div className={styles.mainLayout}>
+      <div className="p-2">
         <Header />
-        <div className="row row-cols-2 row-cols-sm-4 g-2">
-          {result.map((location) => {
-            return (
-              <Location
-                key={location.code}
-                location={location}
-              />
-            );
-          })}
+        <div className="container-fluid">
+          <div className="row row-cols-2 row-cols-sm-4 g-2">
+            {result.map((location) => {
+              return (
+                <Location
+                  key={location.code}
+                  location={location}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-    </Fragment>
+      <div className="p-2">
+        <NewsCategories />
+      </div>
+    </div>
   );
 }
