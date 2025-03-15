@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="244"
+   height="115"
+   viewBox="0 0 244 115"
+   fill="none"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="a.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="1.7069672"
+     inkscape:cx="-38.372149"
+     inkscape:cy="92.561825"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient8"
+       x1="0%"
+       x2="100%"
+       y1="0%"
+       y2="0%">
+      <stop
+         offset="0"
+         stop-color="#18BFCA"
+         id="stop6" />
+      <stop
+         offset="84.17%"
+         stop-color="#18BFCA"
+         id="stop7" />
+      <stop
+         offset="0.84170002"
+         class="tempLineBackground-DS-EntryPoint1-1"
+         id="stop8"
+         style="stop-color:#bfbfbf;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       y2="0%"
+       x2="0%"
+       y1="100%"
+       x1="0%"
+       id="weatherDetailsOpacityGradient">
+      <stop
+         stop-color="#c4c4c4"
+         offset="25%"
+         stop-opacity="0.1"
+         id="stop1" />
+      <stop
+         stop-color="#c4c4c4"
+         offset="93.56%"
+         stop-opacity="0"
+         id="stop2" />
+    </linearGradient>
+    <mask
+       id="weatherDetailsOpacityMask">
+      <rect
+         fill="url(#weatherDetailsOpacityGradient)"
+         x="0"
+         y="0"
+         width="244"
+         height="115"
+         id="rect2" />
+    </mask>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8"
+       id="linearGradient1"
+       x1="0"
+       y1="89.072747"
+       x2="95.413539"
+       y2="89.072747"
+       gradientTransform="scale(2.5572891,0.3910391)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <defs
+     id="defs5">
+    <linearGradient
+       id="TemperatureCardGradient"
+       x1="0%"
+       x2="100%"
+       y1="0%"
+       y2="0%">
+      <stop
+         offset="0"
+         stop-color="#18BFCA"
+         id="stop3" />
+      <stop
+         offset="84.17%"
+         stop-color="#18BFCA"
+         id="stop4" />
+      <stop
+         offset="84.17%"
+         class="tempLineBackground-DS-EntryPoint1-1"
+         id="stop5" />
+    </linearGradient>
+  </defs>
+  <defs
+     id="defs6">
+    <path
+       id="tempTrendArea"
+       d="M0,43.114221444638865C21.13214285714286,41.92267781268971,42.26428571428572,40.73113418074056,61,43.12859285178709C79.73571428571428,45.52605152283362,96.07499999999999,51.51251249687583,122,57.50000000000003C147.925,63.48748750312423,183.43571428571428,69.47600153533047,205.36666666666667,71.87140714821297C227.29761904761907,74.26681276109547,235.64880952380952,73.06910995465421,244,71.87140714821297L244,115C235.64880952380952,115,227.29761904761907,115,205.36666666666667,115C183.43571428571428,115,147.925,115.00000000000001,122,115C96.075,114.99999999999999,79.73571428571428,115,61,115C42.26428571428572,115,21.13214285714286,115,0,115Z"
+       stroke-width="1"
+       stroke-linecap="round"
+       stroke-linejoin="round" />
+  </defs>
+  <defs
+     id="defs7">
+    <g
+       id="tempTrendPath">
+      <path
+         d="M4,40.11497125718572C24.439285714285724,39.00631761702435,44.87857142857145,37.897663976862965,63,40.128342914271464C81.12142857142855,42.35902185167996,96.92499999999998,47.92903336665836,122,53.50000000000002C147.07500000000002,59.07096663334168,181.42142857142858,64.64288838504662,202.63333333333333,66.87165708572859C223.84523809523807,69.10042578641055,231.92261904761904,67.98604143606957,240,66.87165708572859"
+         stroke="url('#TemperatureCardGradient')"
+         stroke-width="8"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         id="path6" />
+      <circle
+         stroke="#fff"
+         stroke-width="3"
+         fill="#18BFCA"
+         cx="202.63333333333333"
+         cy="66.87165708572859"
+         r="10"
+         id="circle6" />
+    </g>
+  </defs>
+  <use
+     x="0"
+     y="0"
+     width="244"
+     height="115"
+     href="#tempTrendArea"
+     stroke="#18BFCA"
+     style="fill:#18bfca;stroke:none"
+     mask="url(#weatherDetailsOpacityMask)"
+     id="use7" />
+  <use
+     x="0"
+     y="0"
+     width="244"
+     height="115"
+     href="#tempTrendPath"
+     id="use8"
+     style="display:none" />
+  <text
+     x="202.63333"
+     y="40.871658"
+     id="text8">27°</text>
+  <g
+     id="use1">
+    <path
+       d="m 4,40.114971 c 20.439286,-1.108653 40.878571,-2.217307 59,0.01337 18.121429,2.230679 33.925,7.80069 59,13.371657 25.075,5.570967 59.42143,11.142888 80.63333,13.371657 21.21191,2.228769 29.28929,1.114384 37.36667,0"
+       stroke="url(#TemperatureCardGradient)"
+       stroke-width="8"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path1"
+       style="stroke:url(#linearGradient1)" />
+    <circle
+       stroke="#ffffff"
+       stroke-width="3"
+       fill="#18bfca"
+       cx="202.63333"
+       cy="66.871658"
+       r="10"
+       id="circle1" />
+  </g>
+</svg>

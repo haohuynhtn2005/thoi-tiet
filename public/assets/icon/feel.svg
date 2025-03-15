@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="260"
+   height="77"
+   viewBox="0 0 260 77"
+   fill="none"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="feel.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="3.2038462"
+     inkscape:cx="123.7575"
+     inkscape:cy="53.685474"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient43"
+       x1="0%"
+       x2="100%"
+       y1="0%"
+       y2="0%">
+      <stop
+         offset="0"
+         stop-color="#DC626D"
+         id="stop41" />
+      <stop
+         offset="75.00%"
+         stop-color="#DC626D"
+         id="stop42" />
+      <stop
+         offset="0.75"
+         class="feelslikeLineBackground-DS-EntryPoint1-1"
+         id="stop43"
+         style="stop-color:#c8c8c8;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="FeelslikeCardGradient"
+       x1="0%"
+       x2="100%"
+       y1="0%"
+       y2="0%">
+      <stop
+         offset="0"
+         stop-color="#DC626D"
+         id="stop1" />
+      <stop
+         offset="75.00%"
+         stop-color="#DC626D"
+         id="stop2" />
+      <stop
+         offset="75.00%"
+         class="feelslikeLineBackground-DS-EntryPoint1-1"
+         id="stop3" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath15">
+      <g
+         inkscape:label="Clip"
+         id="use15">
+        <g
+           inkscape:label="Clip"
+           id="use30">
+          <use
+             x="0"
+             y="0"
+             width="260"
+             height="77"
+             href="#feelslikeTrendPath"
+             style="fill:none"
+             id="use33" />
+          <use
+             x="0"
+             y="0"
+             width="260"
+             height="77"
+             href="#feelslikeTrendPath"
+             style="fill:none"
+             id="use34" />
+          <g
+             id="g34">
+            <path
+               d="m 4,45.977 c 21,0.146625 42,0.29325 63,0.023 21,-0.27025 42,-0.957375 63,0 21,0.957375 42,3.55925 63,0 21,-3.55925 42,-13.279625 63,-23"
+               stroke="url(#FeelslikeCardGradient)"
+               stroke-width="8"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+               id="path34"
+               style="stroke:url(#linearGradient35)" />
+            <circle
+               stroke="#ffffff"
+               stroke-width="3"
+               fill="#dc626d"
+               cx="193"
+               cy="46"
+               r="10"
+               id="circle34" />
+          </g>
+        </g>
+      </g>
+    </clipPath>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#FeelslikeCardGradient"
+       id="linearGradient35"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(2.8141479,0.35534735)"
+       x1="0"
+       y1="53.468811"
+       x2="92.39031"
+       y2="53.468811" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient43"
+       id="linearGradient36"
+       x1="0"
+       y1="53.468811"
+       x2="92.39031"
+       y2="53.468811"
+       gradientTransform="scale(2.8141479,0.35534735)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <defs
+     id="defs4">
+    <g
+       id="feelslikeTrendPath">
+      <path
+         d="M4,45.976999999999975C25,46.123624999999976,46,46.27025,67,46.00000000000001C88,45.72975000000002,109,45.04262500000001,130,46.00000000000001C151,46.957375000000006,172,49.559250000000006,193,46.00000000000001C214,42.44075000000001,235,32.720375000000004,256,23.000000000000004"
+         stroke="url('#FeelslikeCardGradient')"
+         stroke-width="8"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         id="path3" />
+      <circle
+         stroke="#fff"
+         stroke-width="3"
+         fill="#DC626D"
+         cx="193"
+         cy="46.00000000000001"
+         r="10"
+         id="circle3" />
+    </g>
+  </defs>
+  <g
+     id="use32"
+     style="fill:none">
+    <path
+       d="m 4,45.977 c 21,0.146625 31.69988,-1.579499 52.69988,-1.849749 21,-0.27025 49.27916,-5.228581 70.17887,-7.490997 22.87275,-2.475998 49.4102,5.72648 66.43337,8.427372 22.2496,3.530115 43.2485,-1.39031 63.62425,-3.64826"
+       stroke="url(#FeelslikeCardGradient)"
+       stroke-width="8"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path35"
+       style="stroke:url(#linearGradient36);fill:none;fill-opacity:1"
+       sodipodi:nodetypes="csssc" />
+    <circle
+       stroke="#ffffff"
+       stroke-width="3"
+       fill="#dc626d"
+       cx="193"
+       cy="46"
+       r="10"
+       id="circle35" />
+  </g>
+</svg>

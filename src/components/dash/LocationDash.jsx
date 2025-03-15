@@ -85,12 +85,12 @@ export default function LocationDash() {
     status,
     result,
     setResult: setLocations,
-  } = useURL(`${domain}/manager/locations`);
+  } = useURL(`${domain}/staff/locations`);
 
   // Move the filtering and sorting logic into useMemo
   const sortedLocations = useMemo(() => {
     let filtered = [];
-    if (result) {
+    if (Array.isArray(result)) {
       filtered = [...result];
     }
 
@@ -110,14 +110,6 @@ export default function LocationDash() {
     return sortData(filtered, sortConfig.key, sortConfig.direction);
   }, [result, searchTerm, sortConfig]);
 
-  const totalItems = sortedLocations.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  // Get current locations
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentLocations = sortedLocations.slice(startIndex, endIndex);
-
   if (status == 'loading') {
     return <div>Loading...</div>;
   }
@@ -126,6 +118,14 @@ export default function LocationDash() {
     console.warn(result);
     return <ErrorPage message={result.message} />;
   }
+
+  const totalItems = sortedLocations.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  // Get current locations
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentLocations = sortedLocations.slice(startIndex, endIndex);
 
   const handleSortChange = (e) => {
     const [key, direction] = e.target.value.split('-');
@@ -211,8 +211,8 @@ export default function LocationDash() {
 
     try {
       const url = selectedLocation
-        ? `${domain}/manager/locations/${selectedLocation._id}`
-        : `${domain}/manager/locations`;
+        ? `${domain}/staff/locations/${selectedLocation._id}`
+        : `${domain}/staff/locations`;
 
       const response = await fetch(url, {
         method: selectedLocation ? 'PUT' : 'POST',
@@ -235,7 +235,7 @@ export default function LocationDash() {
       }
 
       // Refresh locations list
-      const updatedLocations = await fetch(`${domain}/manager/locations`, {
+      const updatedLocations = await fetch(`${domain}/staff/locations`, {
         credentials: 'include',
       }).then((res) => res.json());
 
@@ -263,7 +263,7 @@ export default function LocationDash() {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `${domain}/manager/locations/${location._id}`,
+            `${domain}/staff/locations/${location._id}`,
             {
               method: 'DELETE',
               credentials: 'include',
@@ -276,7 +276,7 @@ export default function LocationDash() {
           }
 
           // Refresh locations list
-          const updatedLocations = await fetch(`${domain}/manager/locations`, {
+          const updatedLocations = await fetch(`${domain}/staff/locations`, {
             credentials: 'include',
           }).then((res) => res.json());
 
@@ -403,8 +403,16 @@ export default function LocationDash() {
                   <td>{location.region}</td>
                   <td>{location.coordinates?.lat}</td>
                   <td>{location.coordinates?.lon}</td>
-                  <td>{format(new Date(location.createdAt), 'dd/MM/yyyy, HH:mm', { locale: vi })}</td>
-                  <td>{format(new Date(location.updatedAt), 'dd/MM/yyyy, HH:mm', { locale: vi })}</td>
+                  <td>
+                    {format(new Date(location.createdAt), 'dd/MM/yyyy, HH:mm', {
+                      locale: vi,
+                    })}
+                  </td>
+                  <td>
+                    {format(new Date(location.updatedAt), 'dd/MM/yyyy, HH:mm', {
+                      locale: vi,
+                    })}
+                  </td>
                   <td>
                     <div className="d-flex gap-2">
                       <Button

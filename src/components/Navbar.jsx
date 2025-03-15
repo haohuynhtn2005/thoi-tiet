@@ -30,9 +30,9 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-md bg-body-tertiary border-3 border-bottom shadow-sm">
       <div className="container-fluid">
-        <a
+        <Link
           className="navbar-brand"
-          href="#"
+          to="/"
         >
           <img
             src={darkMode ? '/assets/logo-dark.svg' : '/assets/logo.svg'}
@@ -41,7 +41,7 @@ export default function Navbar() {
             // style={{ height: '2em' }}
           />
           {/* Wea */}
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -68,7 +68,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <Link
-                to="/"
+                to="/tin-tuc"
                 className="nav-link"
               >
                 Tin tuc
@@ -111,7 +111,7 @@ export default function Navbar() {
                     to={'/dang-ky'}
                     className="nav-link"
                   >
-                    Tai khoan
+                    Tai khoan {user.name}
                   </Link>
                 </li>
                 <li className="nav-item">

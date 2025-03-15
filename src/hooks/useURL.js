@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export default function useURL(url = '', defaultResult = null) {
+export default function useURL(url = '', defaultResult = null, options = {}) {
+  const optionsRef = useRef(options);
+
   const [fetching, setFetching] = useState({
     status: 'loading',
     result: defaultResult,
@@ -25,6 +27,7 @@ export default function useURL(url = '', defaultResult = null) {
       signal: abortController.signal,
       mode: 'cors',
       credentials: 'include',
+      ...optionsRef.current,
     })
       .then(async (res) => {
         if (!res.ok) {

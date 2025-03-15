@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div>
-      <AdPopup />
+      {/* <AdPopup /> */}
 
       <WeatherInfoContext.Provider value={{}}>
         <LocationOptsContext.Provider value={{ locationOpts }}>

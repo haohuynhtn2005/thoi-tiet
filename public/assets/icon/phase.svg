@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   class="svgBackground-DS-EntryPoint1-1"
+   viewBox="-0 0 500 500"
+   style="transform: rotate(0deg);"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="phase.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="0.818"
+     inkscape:cx="-22.00489"
+     inkscape:cy="353.30073"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     style="transform:rotate(0deg);fill:#5c5c5c;fill-opacity:1;stroke:#acacac;stroke-opacity:1">
+    <path
+       style="fill:#7c7c7c;fill-opacity:1;stroke:#f0f0f0;stroke-width:4.27216;stroke-linecap:round;stroke-opacity:1"
+       id="path4"
+       sodipodi:type="arc"
+       sodipodi:cx="250.00359"
+       sodipodi:cy="250.00006"
+       sodipodi:rx="247.86006"
+       sodipodi:ry="247.86375"
+       sodipodi:start="3.153806"
+       sodipodi:end="3.1429913"
+       sodipodi:arc-type="slice"
+       d="M 2.1620101,246.97289 A 247.86006,247.86375 0 0 1 252.36062,2.1475143 247.86006,247.86375 0 0 1 497.85791,251.68701 247.86006,247.86375 0 0 1 248.98679,497.86173 247.86006,247.86375 0 0 1 2.1437666,249.65339 l 247.8598234,0.34667 z" />
+  </g>
+  <path
+     stroke="#EFB839"
+     fill="#EFB839"
+     d="M 250 0 A 50 250 0 1, 1 250 500 A 250 250 0 1, 1 250 0 z"
+     id="path1" />
+  <title
+     id="title1">14 thg 3</title>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>14 thg 3</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

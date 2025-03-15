@@ -50,7 +50,7 @@ function SidebarContent() {
         </div>
         <div data-bs-dismiss="offcanvas">
           <Link
-            to="/dashboard"
+            to="/quan-ly/nguoi-dung"
             className="d-block p-2 rounded"
           >
             <i className="bi bi-person-fill"></i>&nbsp;Người dùng
@@ -58,7 +58,7 @@ function SidebarContent() {
         </div>
         <div data-bs-dismiss="offcanvas">
           <Link
-            to="/dashboard"
+            to="/quan-ly/nhan-vien"
             className="d-block p-2 rounded"
           >
             <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
@@ -66,7 +66,7 @@ function SidebarContent() {
         </div>
         <div data-bs-dismiss="offcanvas">
           <Link
-            to="khu-vuc"
+            to="/quan-ly/khu-vuc"
             className="d-block p-2 rounded"
           >
             <i className="bi bi-compass-fill"></i>&nbsp;Khu vực
@@ -74,7 +74,7 @@ function SidebarContent() {
         </div>
         <div data-bs-dismiss="offcanvas">
           <Link
-            to="/dashboard"
+            to="/quan-ly/tin-tuc"
             className="d-block p-2 rounded"
           >
             <i className="bi bi-newspaper"></i>&nbsp;Tin tức

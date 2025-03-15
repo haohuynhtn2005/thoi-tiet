@@ -1,172 +1,149 @@
+import { Card, Table } from 'react-bootstrap';
+import { format } from 'date-fns';
+import { vi } from 'date-fns/locale';
+import { domain } from '../../common/commonVal';
+import useURL from '../../hooks/useURL';
+import ErrorPage from '../../pages/ErrorPage';
+
 export default function Overview() {
+  const { status, result } = useURL(`${domain}/staff/overview`);
+
+  if (status == 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status == 'error') {
+    console.warn(result);
+    return <ErrorPage message={result.message} />;
+  }
+
+  const {
+    userCount,
+    staffCount,
+    newsCount,
+    locationCount,
+    latestLocations,
+    latestNews,
+  } = result;
+
+  const formatDate = (date) => {
+    return format(new Date(date), 'dd/MM/yyyy, HH:mm', { locale: vi });
+  };
+
   return (
     <div className="overflow-auto">
-      {/* Main Content */}
       <div className="flex-grow-1">
         <div className="container-fluid p-4">
-          <h2 className="mb-4">Admin Dashboard</h2>
+          <h2 className="mb-4">Tổng quan</h2>
 
           {/* Stats Cards */}
           <div className="row mb-4">
-            <div className="col-md-4">
-              <div className="card shadow-sm">
-                <div className="card-body d-flex align-items-center">
-                  <i className="bi bi-cart3 fs-2 text-primary me-3"></i>
+            <div className="col-md-3">
+              <Card className="shadow-sm overflow-hidden">
+                <Card.Body className="d-flex align-items-center text-bg-primary">
+                  <i className="bi bi-people fs-2 me-3"></i>
                   <div>
-                    <h5>Total Orders</h5>
-                    <h3>1,230</h3>
+                    <h5>Tổng số người dùng</h5>
+                    <h3>{userCount}</h3>
                   </div>
-                </div>
-              </div>
+                </Card.Body>
+              </Card>
             </div>
-            <div className="col-md-4">
-              <div className="card shadow-sm">
-                <div className="card-body d-flex align-items-center">
-                  <i className="bi bi-people fs-2 text-success me-3"></i>
+
+            <div className="col-md-3">
+              <Card className="shadow-sm overflow-hidden">
+                <Card.Body className="d-flex align-items-center text-bg-success">
+                  <i className="bi bi-person-gear fs-2 me-3"></i>
                   <div>
-                    <h5>Total Customers</h5>
-                    <h3>5,420</h3>
+                    <h5>Tổng số nhân viên</h5>
+                    <h3>{staffCount}</h3>
                   </div>
-                </div>
-              </div>
+                </Card.Body>
+              </Card>
             </div>
-            <div className="col-md-4">
-              <div className="card shadow-sm">
-                <div className="card-body d-flex align-items-center">
-                  <i className="bi bi-box-seam fs-2 text-warning me-3"></i>
+
+            <div className="col-md-3">
+              <Card className="shadow-sm overflow-hidden">
+                <Card.Body className="d-flex align-items-center text-bg-warning">
+                  <i className="bi bi-newspaper fs-2 me-3"></i>
                   <div>
-                    <h5>Total Products</h5>
-                    <h3>230</h3>
+                    <h5>Tổng số tin tức</h5>
+                    <h3>{newsCount}</h3>
                   </div>
-                </div>
-              </div>
+                </Card.Body>
+              </Card>
+            </div>
+
+            <div className="col-md-3">
+              <Card className="shadow-sm overflow-hidden">
+                <Card.Body className="d-flex align-items-center text-bg-info">
+                  <i className="bi bi-geo-alt fs-2 me-3"></i>
+                  <div>
+                    <h5>Tổng số địa điểm</h5>
+                    <h3>{locationCount}</h3>
+                  </div>
+                </Card.Body>
+              </Card>
             </div>
           </div>
 
-          {/* Latest Orders Table */}
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5>Latest Orders</h5>
-              <table className="table mt-3">
-                <thead>
+          {/* Latest Updated Locations */}
+          <Card className="shadow-sm mb-4">
+            <Card.Body>
+              <h5 className="card-title">Địa điểm cập nhật gần đây</h5>
+              <Table
+                striped
+                bordered
+                hover
+              >
+                <thead className="table-primary">
                   <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Status</th>
-                    <th>Total</th>
+                    <th>Mã địa điểm</th>
+                    <th>Tên địa điểm</th>
+                    <th>Khu vực</th>
+                    <th>Cập nhật lúc</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>
-                      <span className="badge bg-success">Completed</span>
-                    </td>
-                    <td>$120.00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>
-                      <span className="badge bg-warning">Pending</span>
-                    </td>
-                    <td>$75.50</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Alex Johnson</td>
-                    <td>
-                      <span className="badge bg-danger">Cancelled</span>
-                    </td>
-                    <td>$45.00</td>
-                  </tr>
+                  {latestLocations.map((location) => (
+                    <tr key={location._id}>
+                      <td>{location.code}</td>
+                      <td>{location.name}</td>
+                      <td>{location.region}</td>
+                      <td>{formatDate(location.updatedAt)}</td>
+                    </tr>
+                  ))}
                 </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5>Latest Orders</h5>
-              <table className="table mt-3">
-                <thead>
+              </Table>
+            </Card.Body>
+          </Card>
+
+          {/* Latest Created News */}
+          <Card className="shadow-sm">
+            <Card.Body>
+              <h5 className="card-title">Tin tức mới tạo gần đây</h5>
+              <Table
+                striped
+                bordered
+                hover
+              >
+                <thead className="table-success">
                   <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Status</th>
-                    <th>Total</th>
+                    <th>Tiêu đề</th>
+                    <th>Ngày tạo</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>
-                      <span className="badge bg-success">Completed</span>
-                    </td>
-                    <td>$120.00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>
-                      <span className="badge bg-warning">Pending</span>
-                    </td>
-                    <td>$75.50</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Alex Johnson</td>
-                    <td>
-                      <span className="badge bg-danger">Cancelled</span>
-                    </td>
-                    <td>$45.00</td>
-                  </tr>
+                  {latestNews.map((newsItem) => (
+                    <tr key={newsItem._id}>
+                      <td>{newsItem.title}</td>
+                      <td>{formatDate(newsItem.createdAt)}</td>
+                    </tr>
+                  ))}
                 </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h5>Latest Orders</h5>
-              <table className="table mt-3">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Status</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>
-                      <span className="badge bg-success">Completed</span>
-                    </td>
-                    <td>$120.00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>
-                      <span className="badge bg-warning">Pending</span>
-                    </td>
-                    <td>$75.50</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Alex Johnson</td>
-                    <td>
-                      <span className="badge bg-danger">Cancelled</span>
-                    </td>
-                    <td>$45.00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+              </Table>
+            </Card.Body>
+          </Card>
         </div>
       </div>
     </div>

@@ -8,7 +8,11 @@ import OtherLocations from './OtherLocations';
 import useWeatherInfo from '../../hooks/useWeatherInfo.js';
 import ErrorPage from '../../pages/ErrorPage.jsx';
 import { WeatherInfoContext } from '../../App.jsx';
-import NewsCategories from './News.jsx';
+import RecentNews from './RecentNews.jsx';
+import { DarkModeContext } from '../../providers/AppProvider.jsx';
+import { useContext } from 'react';
+import PropTypes from 'prop-types';
+import IllustrateWeather from './IllustrateWeather.jsx';
 
 function LoadingShowWeather() {
   return (
@@ -47,9 +51,7 @@ function LoadingShowWeather() {
   );
 }
 
-export default function ShowWeather() {
-  const { status, result } = useWeatherInfo();
-
+function ShowWeatherContent({ status, result }) {
   if (status == 'loading') {
     return <LoadingShowWeather />;
   }
@@ -58,6 +60,28 @@ export default function ShowWeather() {
     return <ErrorPage message={result.message} />;
   }
 
+  return (
+    <>
+      <Header />
+      <CurrentWeather />
+      <Forecast />
+      <Details />
+      <WeatherChart />
+      <IllustrateWeather />
+      <OtherLocations />
+    </>
+  );
+}
+
+ShowWeatherContent.propTypes = {
+  status: PropTypes.string,
+  result: PropTypes.object,
+};
+
+export default function ShowWeather() {
+  const { status, result } = useWeatherInfo();
+
+  const { darkMode } = useContext(DarkModeContext);
   return (
     <WeatherInfoContext.Provider value={{ weatherInfo: result }}>
       <video
@@ -69,21 +93,28 @@ export default function ShowWeather() {
         style={{ zIndex: -1 }}
       >
         <source
-          src={'/assets/video/fog.mp4'}
+          src={'/assets/video/fog1.mp4'}
           type="video/mp4"
         />
       </video>
-      <div className={styles.mainLayout}>
+      <div
+        className={styles.mainLayout}
+        style={{
+          backgroundImage: `url(/assets/background/${
+            darkMode ? 'bg-dark' : 'bg-light'
+          }.jpg)`,
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+        }}
+      >
         <div className="p-2">
-          <Header />
-          <CurrentWeather />
-          <Forecast />
-          <Details />
-          <WeatherChart />
-          <OtherLocations />
+          <ShowWeatherContent
+            status={status}
+            result={result}
+          />
         </div>
         <div className="p-2">
-          <NewsCategories />
+          <RecentNews />
         </div>
       </div>
     </WeatherInfoContext.Provider>

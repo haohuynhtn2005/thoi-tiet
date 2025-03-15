@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="110"
+   height="110"
+   viewBox="0 0 180 180"
+   fill="none"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="wind.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="3.7181818"
+     inkscape:cx="-6.7237164"
+     inkscape:cy="101.12469"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <path
+     d="M90 10 A 80 80, 0, 0, 1, 165.18 62.64 "
+     fill="none"
+     class="windPathBackground-DS-EntryPoint1-1"
+     stroke-width="8"
+     stroke-linecap="round"
+     stroke-opacity="0.1"
+     transform="rotate(10 90 90)"
+     id="path1"
+     style="fill:none;stroke:#54b17e;stroke-opacity:1;fill-opacity:1" />
+  <path
+     d="M90 10 A 80 80, 0, 0, 1, 165.18 62.64 "
+     fill="none"
+     class="windPathBackground-DS-EntryPoint1-1"
+     stroke-width="8"
+     stroke-linecap="round"
+     stroke-opacity="0.1"
+     transform="rotate(100 90 90)"
+     id="path2"
+     style="fill:none;stroke:#54b17e;stroke-opacity:1;fill-opacity:1" />
+  <path
+     d="M90 10 A 80 80, 0, 0, 1, 165.18 62.64 "
+     fill="none"
+     class="windPathBackground-DS-EntryPoint1-1"
+     stroke-width="8"
+     stroke-linecap="round"
+     stroke-opacity="0.1"
+     transform="rotate(190 90 90)"
+     id="path3"
+     style="fill:none;stroke:#54b17e;stroke-opacity:1;fill-opacity:1" />
+  <path
+     d="M90 10 A 80 80, 0, 0, 1, 165.18 62.64 "
+     fill="none"
+     class="windPathBackground-DS-EntryPoint1-1"
+     stroke-width="8"
+     stroke-linecap="round"
+     stroke-opacity="0.1"
+     transform="rotate(280 90 90)"
+     id="path4"
+     style="fill:none;stroke-width:8.00018182;stroke-dasharray:none;stroke:#54b17e;stroke-opacity:1;fill-opacity:1" />
+  <path
+     d="m 122.22006,141.89349 a 108.02221,113.2941 26 0 1 -61.027027,1.43663"
+     fill="none"
+     stroke="rgba(85, 177, 126, 1)"
+     stroke-width="11.0627"
+     stroke-linecap="round"
+     id="path5"
+     style="fill:none;fill-opacity:1;stroke:#54b17e;stroke-opacity:1;stroke-width:8.01654545;stroke-dasharray:none" />
+  <g
+     id="g6"
+     style="fill:#54b17e;fill-opacity:1;stroke:#54b17e;stroke-opacity:1"
+     transform="rotate(19.7,96.76636,85.989856)">
+    <path
+       d="m 86.325,40.3742 c 0.5891,-2.5977 4.2658,-2.6644 4.9488,-0.0899 l 20.7315,78.1441 c 1.7109,6.449 -3.1317,12.7758 -9.8037,12.8084 l -23.6952,0.1157 c -6.56035,0.032 -11.44267,-6.0511 -9.99169,-12.4491 z"
+       fill="rgba(85, 177, 126, 1)"
+       transform="rotate(-20,90,90)"
+       id="path6"
+       style="fill:#54b17e;fill-opacity:1;stroke:#54b17e;stroke-opacity:1">
+      <animateMotion
+         id="windDirectionAni835"
+         dur="0.8s"
+         repeatCount="0"
+         begin="weatherDetailsWindCardLink835.mouseenter"
+         end="weatherDetailsWindCardLink835.mouseleave"
+         path="M0 0Z" />
+      <animateMotion
+         dur="1.5s"
+         begin="windDirectionAni835.end"
+         end="weatherDetailsWindCardLink835.mouseleave"
+         repeatCount="indefinite"
+         path="M0 0Z" />
+    </path>
+  </g>
+</svg>

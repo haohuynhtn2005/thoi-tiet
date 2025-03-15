@@ -4,16 +4,16 @@ import Header from './Header';
 import ErrorPage from '../../pages/ErrorPage.jsx';
 import { getTemperatureString } from '../../common/utils.js';
 import { useContext } from 'react';
-import { ModeContext } from '../../providers/AppProvider.jsx';
+import { DarkModeContext, ModeContext } from '../../providers/AppProvider.jsx';
 import useRandomLocations from '../../hooks/useRandomLocations.js';
 import PropTypes from 'prop-types';
-import NewsCategories from './News.jsx';
+import RecentNews from './RecentNews.jsx';
 
 function LoadingLocation() {
   return (
-    <section
-      className="content-wrapper"
-      style={{ minHeight: '100vh' }}
+    <div
+      className="container-fluid"
+      style={{ minHeight: '100%' }}
     >
       <div className="placeholder-glow mb-1">
         <span
@@ -27,28 +27,26 @@ function LoadingLocation() {
       <div className="placeholder-glow mb-1">
         <span className="placeholder col-7" />
       </div>
-      <div className="container-fluid">
-        <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
-          {(() => {
-            const arr = [];
-            for (let i = 0; i < 12; i++) {
-              arr.push(
+      <div className=" row row-cols-2 row-cols-sm-4 g-2 g-lg-3 mb-1">
+        {(() => {
+          const arr = [];
+          for (let i = 0; i < 12; i++) {
+            arr.push(
+              <div
+                key={i}
+                className="placeholder-glow col"
+              >
                 <div
-                  key={i}
-                  className="placeholder-glow col"
-                >
-                  <div
-                    className="placeholder col-12"
-                    style={{ height: '12em' }}
-                  />
-                </div>
-              );
-            }
-            return arr;
-          })()}
-        </div>
+                  className="placeholder col-12"
+                  style={{ height: '12em' }}
+                />
+              </div>
+            );
+          }
+          return arr;
+        })()}
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -97,7 +95,7 @@ Location.propTypes = {
   location: PropTypes.object,
 };
 
-export default function LocationList() {
+function LocationListContent() {
   const { status, result } = useRandomLocations();
   if (status == 'loading') {
     return <LoadingLocation />;
@@ -109,24 +107,41 @@ export default function LocationList() {
   }
 
   return (
-    <div className={styles.mainLayout}>
+    <div className="container-fluid">
+      <div className="row row-cols-2 row-cols-sm-4 g-2">
+        {result.map((location) => {
+          return (
+            <Location
+              key={location.code}
+              location={location}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default function LocationList() {
+  const { darkMode } = useContext(DarkModeContext);
+
+  return (
+    <div
+      className={styles.mainLayout}
+      style={{
+        backgroundImage: `url(/assets/background/${
+          darkMode ? 'bg-dark' : 'bg-light'
+        }.jpg)`,
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+      }}
+    >
       <div className="p-2">
         <Header />
-        <div className="container-fluid">
-          <div className="row row-cols-2 row-cols-sm-4 g-2">
-            {result.map((location) => {
-              return (
-                <Location
-                  key={location.code}
-                  location={location}
-                />
-              );
-            })}
-          </div>
-        </div>
+        <LocationListContent />
       </div>
       <div className="p-2">
-        <NewsCategories />
+        <RecentNews />
       </div>
     </div>
   );
