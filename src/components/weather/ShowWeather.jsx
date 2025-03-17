@@ -67,7 +67,7 @@ function ShowWeatherContent({ status, result }) {
       <Forecast />
       <Details />
       <WeatherChart />
-      <IllustrateWeather />
+      {/* <IllustrateWeather /> */}
       <OtherLocations />
     </>
   );

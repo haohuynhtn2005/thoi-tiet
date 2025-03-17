@@ -28,7 +28,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-md bg-body-tertiary border-3 border-bottom shadow-sm">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary border-3 border-bottom shadow-sm">
       <div className="container-fluid">
         <Link
           className="navbar-brand"
@@ -63,7 +63,7 @@ export default function Navbar() {
                 to="/"
                 className="nav-link"
               >
-                Khu vuc
+                <i className="bi bi-compass-fill"></i> Khu vực
               </Link>
             </li>
             <li className="nav-item">
@@ -71,7 +71,7 @@ export default function Navbar() {
                 to="/tin-tuc"
                 className="nav-link"
               >
-                Tin tuc
+                <i className="bi bi-newspaper"></i> Tin tức
               </Link>
             </li>
           </ul>
@@ -83,7 +83,7 @@ export default function Navbar() {
                     to={'/dang-nhap'}
                     className="nav-link"
                   >
-                    Đăng nhập
+                    <i className="bi bi-box-arrow-in-right"></i> Đăng nhập
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -91,7 +91,7 @@ export default function Navbar() {
                     to={'/dang-ky'}
                     className="nav-link"
                   >
-                    Đăng ky
+                    <i className="bi bi-journal-check"></i> Đăng ký
                   </Link>
                 </li>
               </>
@@ -103,25 +103,35 @@ export default function Navbar() {
                     onClick={logout}
                     className="nav-link"
                   >
-                    Đăng xuat
+                    <i className="bi bi-box-arrow-left"></i> Đăng xuất
                   </button>
                 </li>
                 <li className="nav-item">
                   <Link
-                    to={'/dang-ky'}
+                    to={'/ho-so'}
                     className="nav-link"
                   >
-                    Tai khoan {user.name}
+                    <i className="bi bi-person-circle"></i> Tài khoản
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    to={'/quan-ly'}
+                    to={'/bai-dang'}
                     className="nav-link"
                   >
-                    Quan ly
+                    <i className="bi bi-blockquote-left"></i> Bài đăng
                   </Link>
                 </li>
+                {user?.role != 'user' && (
+                  <li className="nav-item">
+                    <Link
+                      to={'/quan-ly'}
+                      className="nav-link"
+                    >
+                      <i className="bi bi-gear-wide-connected"></i> Quản lý
+                    </Link>
+                  </li>
+                )}
               </>
             )}
             <li className="nav-item align-self-center">

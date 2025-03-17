@@ -20,6 +20,9 @@ import NewsPage from './components/news/NewsPage.jsx';
 import ShowNews from './components/news/ShowNews.jsx';
 import UserDash from './components/dash/UserDash.jsx';
 import StaffDash from './components/dash/StaffDash.jsx';
+import Profile from './components/profile/Profile.jsx';
+import Auth from './components/auth/Auth.jsx';
+import MyNews from './components/news/MyNews.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,8 @@ const router = createBrowserRouter([
       { path: '/chi-tiet/:locationCode', element: <ShowWeather /> },
       { path: '/tin-tuc', element: <NewsPage /> },
       { path: '/tin-tuc/:id', element: <ShowNews /> },
+      { path: '/ho-so', element: <Auth Comp={Profile} /> },
+      { path: '/bai-dang', element: <Auth Comp={MyNews} /> },
     ],
   },
   {

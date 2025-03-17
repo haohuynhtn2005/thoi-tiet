@@ -1,5 +1,5 @@
 import styles from '../../styles/layout.module.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { DarkModeContext, UserContext } from '../../providers/AppProvider';
 import { format } from 'date-fns';
@@ -14,9 +14,8 @@ export default function ShowNews() {
     loading,
     error,
     result: news,
-    setResult: setNews,
     reFetch,
-  } = useFetch(`http://localhost:3000/news/${id}`, []);
+  } = useFetch(`${domain}/news/${id}`, []);
 
   if (loading) return 'loading';
 

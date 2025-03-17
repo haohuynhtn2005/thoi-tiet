@@ -37,6 +37,7 @@ export default function Login() {
         theme: darkMode && 'dark',
       }).then((res) => {
         if (res.dismiss || res.isConfirmed) {
+          fetchUser();
           navigate('/');
         }
       });

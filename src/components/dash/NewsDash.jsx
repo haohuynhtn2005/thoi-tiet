@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { domain } from '../../common/commonVal';
 
-const API_URL = 'http://localhost:3000/staff/news';
+const API_URL = `${domain}/staff/news`;
 
 export default function NewsDashboard() {
   const [newsData, setNewsData] = useState([]);

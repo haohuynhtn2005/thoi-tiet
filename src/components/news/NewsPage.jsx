@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, useContext } from 'react';
 import { DarkModeContext } from '../../providers/AppProvider';
 import { Link } from 'react-router-dom';
+import { domain } from '../../common/commonVal';
 
 const categories = ['Cảnh báo', 'Dự báo', 'Tổng hợp', 'Người dùng'];
 
@@ -16,7 +17,7 @@ export default function NewsCategories() {
   const articlesPerPage = 6;
 
   useEffect(() => {
-    fetch('http://localhost:3000/news')
+    fetch(`${domain}/news`)
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

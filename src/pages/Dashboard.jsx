@@ -37,10 +37,10 @@ function SidebarContent() {
             to="/quan-ly"
             className="d-block p-2 rounded"
           >
-            <i className="bi bi-peace-fill"></i>&nbsp;Tong quan
+            <i className="bi bi-peace-fill"></i>&nbsp;Tổng quan
           </Link>
         </div>
-        <div data-bs-dismiss="offcanvas">
+        {/* <div data-bs-dismiss="offcanvas">
           <Link
             to="/dashboard"
             className="d-block p-2 rounded"
@@ -63,7 +63,7 @@ function SidebarContent() {
           >
             <i className="bi bi-journal-bookmark-fill"></i>&nbsp;Nhân viên
           </Link>
-        </div>
+        </div> */}
         <div data-bs-dismiss="offcanvas">
           <Link
             to="/quan-ly/khu-vuc"
